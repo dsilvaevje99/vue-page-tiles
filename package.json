@@ -22,9 +22,9 @@
     "page-builder",
     "structure",
     "content",
-    "html",
-    "html",
-    "generator"
+    "generator",
+    "content-generator",
+    "JSON"
   ],
   "author": "Daniel Sueakham-Silva",
   "license": "ISC",
