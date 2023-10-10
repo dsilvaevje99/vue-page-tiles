@@ -44,15 +44,15 @@ This reactive object will be used when generating the page content as well, so m
 Then insert the `<PageTiles />` component wherever you want the page content to be displayed, and pass the reactive object you just created as a prop called "content":
 
 ```
-<PageTiles :content='page' />
+<PageTiles :page='page' />
 ```
 
 #### How to generate page content
 
-Simply add the `<PageTileEditor />` wherever you want the user to be able to generate content, and bind the reactive object you created earlier with v-model:
+Simply add the `<PageTileEditor />` wherever you want the user to be able to generate content, and bind the content array within the reactive object you created earlier with v-model:
 
 ```
-<PageTileEditor v-model='page' />
+<PageTileEditor v-model='page.content' />
 ```
 
 #### Saving the page content
