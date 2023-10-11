@@ -9,12 +9,13 @@ This package let's you setup a Vue project where a user can generate page conten
 ### Currently available:
 
 - Page Header
+- Paragraph
 
 ### Coming soon:
 
 - Heading
-- Paragraph
 - Row & Columns
+- Banners
 
 ## Installation and usage
 
@@ -42,7 +43,7 @@ const page = reactive({
 ```
 
 This reactive object will be used when generating the page content as well, so make sure to create it in a component they have in common.
-Then insert the `<PageTiles />` component wherever you want the page content to be displayed, and pass the reactive object you just created as a prop called "content":
+Then insert the `<PageTiles />` component wherever you want the page content to be displayed, and pass the reactive object you just created as a prop called "page":
 
 ```
 <PageTiles :page='page' />

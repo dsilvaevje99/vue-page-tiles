@@ -24,9 +24,17 @@
             <MenuItem
               v-for="(tile, index) in tiles"
               :key="`tile-${tile.title}-${index}`"
-              class="bg-gray-100 p-2"
             >
-              <button @click="$emit('add', tile)">{{ tile.title }}</button>
+              <button
+                class="base-transition bg-gray-100 hover:bg-cyan-700 hover:text-white p-2 text-center"
+                @click="$emit('add', tile)"
+              >
+                <component
+                  :is="iconList.find((i) => i.for === tile.title)?.icon"
+                  class="h-4 w-4 mx-auto"
+                ></component>
+                <span>{{ tile.title }}</span>
+              </button>
             </MenuItem>
           </div>
         </MenuItems>
@@ -38,7 +46,13 @@
 <script setup lang="ts">
 import tiles from "../../tiles";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
-import { PlusIcon } from "@heroicons/vue/20/solid";
+import { PlusIcon, Bars3BottomLeftIcon } from "@heroicons/vue/20/solid";
+import { HeaderIcon } from "../../assets/custom-icons";
 
 const emit = defineEmits(["add"]);
+
+const iconList = [
+  { for: "Page header", icon: HeaderIcon },
+  { for: "Paragraph", icon: Bars3BottomLeftIcon },
+];
 </script>
