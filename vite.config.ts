@@ -3,9 +3,10 @@ import * as path from "path";
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
 import tailwindcss from "tailwindcss";
+import svgLoader from "vite-svg-loader";
 
 export default defineConfig({
-  plugins: [vue(), dts(), tailwindcss()],
+  plugins: [vue(), dts(), tailwindcss(), svgLoader()],
   build: {
     lib: {
       entry: path.resolve(__dirname, "src/index.ts"),

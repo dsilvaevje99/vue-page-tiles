@@ -10,17 +10,19 @@
       class="p-10 pt-0 group"
     >
       <div
-        class="relative border-b-2 border-transparent group-hover:border-cyan-700 flex flex-col pb-7"
+        class="base-transition relative border-b-2 border-transparent group-hover:border-cyan-700 group-hover:bg-gray-100 flex flex-col pb-7"
       >
         <component
+          class="bg-transparent"
           :is="component.edit"
           :state="modelValue"
           :index="index"
-          @update="(c: Tile) => handleContentChanged(c, index)"
+          @update="(content: Tile) => handleContentChanged(content, index)"
         ></component>
-        <add-tile-menu
-          class="absolute left-1/2 top-full transform -translate-x-1/2 -translate-y-1/2 hidden group-hover:block z-50"
-          @add="handleAddTile"
+        <tile-actions
+          class="hidden group-hover:block"
+          @add="(tile: Tile) => handleAddTile(tile, index)"
+          @delete="() => handleDeleteTile(index)"
         />
       </div>
     </div>
@@ -39,6 +41,7 @@
 
 <script setup lang="ts">
 import "../../style.css";
+import TileActions from "./menus/TileActions.vue";
 import AddTileMenu from "./menus/AddTileMenu.vue";
 import type { Tile } from "../interfaces";
 
@@ -55,8 +58,13 @@ const props = defineProps({
 
 const emit = defineEmits(["update:modelValue"]);
 
-const handleAddTile = (tile: Tile) => {
-  props.modelValue.push(tile);
+const handleAddTile = (tile: Tile, index?: number) => {
+  if (index) props.modelValue.splice(index++, 0, tile);
+  else props.modelValue.push(tile);
+};
+
+const handleDeleteTile = (index: number) => {
+  props.modelValue.splice(index, 1);
 };
 
 const handleContentChanged = (newContent: Tile, index: number) => {
