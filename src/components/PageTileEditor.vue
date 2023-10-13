@@ -40,9 +40,10 @@
 </template>
 
 <script setup lang="ts">
+import "../style.css"; // needed for CSS to be included in build
 import TileActions from "./menus/TileActions.vue";
 import AddTileMenu from "./menus/AddTileMenu.vue";
-import type { Tile, TileTemplate } from "../interfaces";
+import type { TileTemplate } from "../interfaces";
 
 const props = defineProps({
   modelValue: {
