@@ -17,11 +17,11 @@
           :is="component.edit"
           :state="modelValue"
           :index="index"
-          @update="(content: Tile) => handleContentChanged(content, index)"
+          @update="(content: TileTemplate) => handleContentChanged(content, index)"
         ></component>
         <tile-actions
           class="hidden group-hover:block"
-          @add="(tile: Tile) => handleAddTile(tile, index)"
+          @add="(tile: TileTemplate) => handleAddTile(tile, index)"
           @delete="() => handleDeleteTile(index)"
         />
       </div>
@@ -40,14 +40,13 @@
 </template>
 
 <script setup lang="ts">
-import "../../style.css";
 import TileActions from "./menus/TileActions.vue";
 import AddTileMenu from "./menus/AddTileMenu.vue";
-import type { Tile } from "../interfaces";
+import type { Tile, TileTemplate } from "../interfaces";
 
 const props = defineProps({
   modelValue: {
-    type: Array as () => Tile[],
+    type: Array as () => TileTemplate[],
     required: true,
     default: {
       content: [],
@@ -58,8 +57,8 @@ const props = defineProps({
 
 const emit = defineEmits(["update:modelValue"]);
 
-const handleAddTile = (tile: Tile, index?: number) => {
-  if (index) props.modelValue.splice(index++, 0, tile);
+const handleAddTile = (tile: TileTemplate, index?: number) => {
+  if (index !== undefined) props.modelValue.splice(index + 1, 0, tile);
   else props.modelValue.push(tile);
 };
 
@@ -67,8 +66,8 @@ const handleDeleteTile = (index: number) => {
   props.modelValue.splice(index, 1);
 };
 
-const handleContentChanged = (newContent: Tile, index: number) => {
-  const copy: Tile[] = [...props.modelValue];
+const handleContentChanged = (newContent: TileTemplate, index: number) => {
+  const copy: TileTemplate[] = [...props.modelValue];
   copy[index] = newContent;
   emit("update:modelValue", copy);
 };

@@ -5,6 +5,7 @@
       :key="`tile-d-${tile.title}`"
       :is="tile.display"
       :data="tile.data"
+      :attributes="tile.attributes"
     ></component>
   </div>
   <div v-else>

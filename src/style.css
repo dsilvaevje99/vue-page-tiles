@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  button {
+    @apply base-transition;
+  }
+
+  [contenteditable]:not(:focus):empty:before {
+    content: attr(placeholder);
+    pointer-events: none;
+    display: block; /* For Firefox */
+    @apply text-gray-400;
+  }
+}
+
+@layer utilities {
+  .base-transition {
+    @apply transition-all ease-in-out duration-300;
+  }
+}

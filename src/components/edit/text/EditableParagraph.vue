@@ -9,11 +9,11 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import type { Tile } from "../../../interfaces";
+import type { TileTemplate } from "../../../interfaces";
 
 const props = defineProps({
   state: {
-    type: Array as () => Tile[],
+    type: Array as () => TileTemplate[],
     required: true,
   },
   index: {
