@@ -8,14 +8,15 @@ This package let's you setup a Vue project where a user can generate page conten
 
 ### Currently available:
 
-- Page Header
+- Headings (h1-h6)
 - Paragraph
 
 ### Coming soon:
 
-- Heading
-- Row & Columns
+- Columns
+- Spacers
 - Banners
+- Media (Images & videos)
 
 ## Installation and usage
 

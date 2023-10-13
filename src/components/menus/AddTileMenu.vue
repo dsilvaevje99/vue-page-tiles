@@ -19,20 +19,36 @@
       >
         <MenuItems
           class="absolute left-1/2 transform -translate-x-1/2 z-10 mt-2 w-max origin-top-center rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+          unmount
         >
           <div class="grid grid-cols-3 gap-2 p-2">
             <MenuItem
               v-for="(tile, index) in tiles"
               :key="`tile-${tile.title}-${index}`"
             >
-              <button
-                class="base-transition bg-gray-100 hover:bg-cyan-700 hover:text-white p-2 text-center"
-                @click="$emit('add', tile)"
+              <TileVariantsMenu
+                v-if="tile.variants && tile.variants.length >= 1"
+                :variants="tile.variants"
+                :variant-menu-key="tile.variantMenuKey!"
+                @add="(tile: TileTemplate) => $emit('add', tile)"
               >
-                <component
-                  :is="iconList.find((i) => i.for === tile.title)?.icon"
-                  class="h-4 w-4 mx-auto"
-                ></component>
+                <PopoverButton
+                  class="base-transition w-full bg-gray-100 hover:bg-cyan-700 hover:text-white p-2 text-center"
+                  @click="$emit('add', tile.variants[0])"
+                >
+                  <component
+                    :is="tile.icon"
+                    class="h-4 w-4 mx-auto"
+                  ></component>
+                  <span>{{ tile.title }}</span>
+                </PopoverButton>
+              </TileVariantsMenu>
+              <button
+                v-else
+                class="base-transition bg-gray-100 hover:bg-cyan-700 hover:text-white p-2 text-center"
+                @click="$emit('add', tile.template)"
+              >
+                <component :is="tile.icon" class="h-4 w-4 mx-auto"></component>
                 <span>{{ tile.title }}</span>
               </button>
             </MenuItem>
@@ -44,15 +60,17 @@
 </template>
 
 <script setup lang="ts">
-import tiles from "../../tiles";
-import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
-import { PlusIcon, Bars3BottomLeftIcon } from "@heroicons/vue/20/solid";
-import { HeaderIcon } from "../../assets/custom-icons";
+import tiles from "../../tile-list";
+import {
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+  PopoverButton,
+} from "@headlessui/vue";
+import { PlusIcon } from "@heroicons/vue/20/solid";
+import TileVariantsMenu from "./TileVariantsMenu.vue";
+import type { TileTemplate } from "../../interfaces";
 
-const emit = defineEmits(["add"]);
-
-const iconList = [
-  { for: "Page header", icon: HeaderIcon },
-  { for: "Paragraph", icon: Bars3BottomLeftIcon },
-];
+defineEmits(["add"]);
 </script>

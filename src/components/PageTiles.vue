@@ -1,10 +1,11 @@
 <template>
   <div v-if="page.content.length > 0" class="flex flex-col w-full">
     <component
-      v-for="tile in page.content"
-      :key="`tile-d-${tile.title}`"
+      v-for="(tile, index) in page.content"
+      :key="`tile-d-${index}`"
       :is="tile.display"
       :data="tile.data"
+      :attributes="tile.attributes"
     ></component>
   </div>
   <div v-else>
