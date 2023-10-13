@@ -48,5 +48,5 @@ export interface Tile {
 }
 
 export interface PageContent {
-  content: Tile[];
+  content: TileTemplate[];
 }
