@@ -1,8 +1,12 @@
 import type { Tile } from "./interfaces";
 
-import { HEADING_TEMPLATE, PARAGRAPH_TEMPLATE } from "./tile-templates";
+import {
+  HEADING_TEMPLATE,
+  PARAGRAPH_TEMPLATE,
+  VERTICAL_SPACER_TEMPLATE,
+} from "./tile-templates";
 
-import { Bars3BottomLeftIcon } from "@heroicons/vue/20/solid";
+import { Bars3BottomLeftIcon, ArrowsUpDownIcon } from "@heroicons/vue/20/solid";
 import { HeaderIcon } from "./assets/custom-icons";
 
 export const HEADING_VARIANTS = [
@@ -13,6 +17,10 @@ export const HEADING_VARIANTS = [
   { type: "h5", size: "base" },
   { type: "h6", size: "sm" },
 ];
+
+/* export const SPACER_VARIANTS = [
+
+] */
 
 export default <Tile[]>[
   {
@@ -32,5 +40,10 @@ export default <Tile[]>[
     title: "Paragraph",
     icon: Bars3BottomLeftIcon,
     template: PARAGRAPH_TEMPLATE,
+  },
+  {
+    title: "Spacer",
+    icon: ArrowsUpDownIcon,
+    template: VERTICAL_SPACER_TEMPLATE,
   },
 ];

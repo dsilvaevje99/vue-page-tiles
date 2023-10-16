@@ -26,7 +26,7 @@ const emit = defineEmits(["update"]);
 
 const value = computed({
   get() {
-    return props.state[props.index].data.text || "";
+    return props.state[props.index].data?.text || "";
   },
   set(newVal: string) {
     const oldItem = props.state[props.index];

@@ -4,7 +4,8 @@ export interface Data {
 
 export interface Attributes {
   align?: "left" | "center" | "right";
-  width?: number;
+  width?: string;
+  height?: string;
   fontWeight?:
     | "thin"
     | "extralight"
@@ -35,7 +36,7 @@ export interface Attributes {
 export interface TileTemplate {
   display: Object;
   edit: Object;
-  data: Data;
+  data?: Data;
   attributes?: Attributes;
 }
 

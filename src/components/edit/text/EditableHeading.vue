@@ -29,7 +29,7 @@ const emit = defineEmits(["update"]);
 const tile = computed(() => props.state[props.index]);
 const value = computed({
   get() {
-    return tile.value.data.text || "";
+    return tile.value.data?.text || "";
   },
   set(newVal: string) {
     const oldItem = tile.value;
