@@ -9,6 +9,9 @@ import EditableParagraph from "./components/edit/text/EditableParagraph.vue";
 import VerticalSpacer from "./components/display/layout/VerticalSpacer.vue";
 import EditableVerticalSpacer from "./components/edit/layout/EditableVerticalSpacer.vue";
 
+import Columns from "./components/display/layout/Columns.vue";
+import EditableColumns from "./components/edit/layout/EditableColumns.vue";
+
 export const HEADING_TEMPLATE: TileTemplate = {
   display: Heading,
   edit: EditableHeading,
@@ -30,5 +33,16 @@ export const VERTICAL_SPACER_TEMPLATE: TileTemplate = {
   edit: EditableVerticalSpacer,
   attributes: {
     height: "",
+  },
+};
+
+export const COLUMNS_TEMPLATE: TileTemplate = {
+  display: Columns,
+  edit: EditableColumns,
+  data: {
+    columns: [[], []],
+  },
+  attributes: {
+    gap: 8,
   },
 };

@@ -11,16 +11,19 @@
         static
         class="absolute left-1/2 transform -translate-x-1/2 z-10 w-max origin-top-center rounded-md bg-gray-100 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
       >
-        <div v-if="variantMenuKey === 'headerType'">
-          <HeaderTypeMenuOptions @add="handleAddHeaderVariant" />
+        <div v-if="tileTitle === 'Heading'">
+          <HeadingVariantOptions @add="handleAddHeaderVariant" />
         </div>
-        <div v-else class="flex-col">
+        <div v-else-if="tileTitle === 'Columns'">
+          <ColumnVariantOptions @add="handleAddColumnVariant" />
+        </div>
+        <div v-else class="flex flex-col">
           <div v-for="(tile, index) in variants" :key="`tile-variant-${index}`">
             <button
               class="base-transition bg-gray-100 hover:bg-cyan-700 hover:text-white p-2"
               @click="$emit('add', tile)"
             >
-              {{ tile.attributes![variantMenuKey as keyof Attributes] }}
+              {{ tileTitle }} option {{ index + 1 }}
             </button>
           </div>
         </div>
@@ -32,15 +35,16 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { Attributes, TileTemplate } from "../../interfaces";
-import HeaderTypeMenuOptions from "./HeaderTypeMenuOptions.vue";
+import HeadingVariantOptions from "./variants/HeadingVariantOptions.vue";
 import { Popover, PopoverPanel } from "@headlessui/vue";
+import ColumnVariantOptions from "./variants/ColumnVariantOptions.vue";
 
 const props = defineProps({
   variants: {
     type: Array as () => TileTemplate[],
     required: true,
   },
-  variantMenuKey: {
+  tileTitle: {
     type: String,
     required: true,
   },
@@ -54,6 +58,11 @@ const handleAddHeaderVariant = (variant: String) => {
   const template = props.variants.find(
     (v) => v.attributes?.headerType === variant
   );
+  if (template) emit("add", template);
+};
+
+const handleAddColumnVariant = (index: number) => {
+  const template = props.variants[index];
   if (template) emit("add", template);
 };
 </script>

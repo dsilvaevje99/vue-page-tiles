@@ -4,9 +4,11 @@ import {
   HEADING_TEMPLATE,
   PARAGRAPH_TEMPLATE,
   VERTICAL_SPACER_TEMPLATE,
+  COLUMNS_TEMPLATE,
 } from "./tile-templates";
 
 import { Bars3BottomLeftIcon, ArrowsUpDownIcon } from "@heroicons/vue/20/solid";
+import { ViewColumnsIcon } from "@heroicons/vue/24/outline";
 import { HeaderIcon } from "./assets/custom-icons";
 
 export const HEADING_VARIANTS = [
@@ -18,9 +20,11 @@ export const HEADING_VARIANTS = [
   { type: "h6", size: "sm" },
 ];
 
-/* export const SPACER_VARIANTS = [
-
-] */
+export const COLUMNS_VARIANTS = [
+  { columns: [[], []] },
+  { columns: [[], [], []] },
+  { columns: [[], [], [], []] },
+];
 
 export default <Tile[]>[
   {
@@ -34,7 +38,6 @@ export default <Tile[]>[
         fontSize: variant.size,
       },
     })),
-    variantMenuKey: "headerType",
   },
   {
     title: "Paragraph",
@@ -45,5 +48,16 @@ export default <Tile[]>[
     title: "Spacer",
     icon: ArrowsUpDownIcon,
     template: VERTICAL_SPACER_TEMPLATE,
+  },
+  {
+    title: "Columns",
+    icon: ViewColumnsIcon,
+    template: COLUMNS_TEMPLATE,
+    variants: COLUMNS_VARIANTS.map(({ columns }) => ({
+      ...COLUMNS_TEMPLATE,
+      data: {
+        columns,
+      },
+    })),
   },
 ];

@@ -1,5 +1,5 @@
 <template>
-  <p>{{ data?.text }}</p>
+  <p class="text-ellipsis overflow-hidden">{{ data?.text }}</p>
 </template>
 
 <script setup lang="ts">

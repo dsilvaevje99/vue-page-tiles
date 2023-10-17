@@ -10,11 +10,11 @@ This package let's you setup a Vue project where a user can generate page conten
 
 - Headings (h1-h6)
 - Paragraph
+- Columns
+- Vertical spacer
 
 ### Coming soon:
 
-- Columns
-- Spacers
 - Banners
 - Media (Images & videos)
 
