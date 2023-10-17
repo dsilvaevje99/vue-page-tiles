@@ -1,7 +1,9 @@
 <template>
   <component
     :is="header"
-    :class="`text-${fontSize} text-${attributes?.align || 'center'}`"
+    :class="`text-${fontSize} text-${
+      attributes?.align || 'center'
+    } text-ellipsis overflow-hidden`"
   >
     {{ data?.text }}
   </component>
