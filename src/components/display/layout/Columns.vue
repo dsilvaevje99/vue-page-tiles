@@ -1,5 +1,7 @@
 <template>
-  <div :class="`grid grid-cols-${columns?.length} gap-${gap}`">
+  <div
+    :class="`grid grid-flow-row sm:grid-flow-col sm:auto-cols-fr gap-${gap}`"
+  >
     <div v-for="(col, index) in columns" :key="`col-d-${index}`">
       <component
         v-for="tile in col"

@@ -1,5 +1,5 @@
 <template>
-  <div :class="`grid grid-cols-${columns.length}`">
+  <div class="grid grid-flow-row sm:grid-flow-col sm:auto-cols-fr">
     <div v-for="(_, index) in columns" :key="`col-${index}`">
       <PageTileEditor v-model="value[index]" :disable-tiles="['Columns']" />
     </div>
@@ -23,8 +23,6 @@ const props = defineProps({
 });
 
 const emit = defineEmits(["update"]);
-
-const groupNameMap = ["a", "b", "c", "d"];
 
 const tile = computed(() => props.state[props.index]);
 const columns = computed({
