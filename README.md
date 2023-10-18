@@ -58,7 +58,11 @@ Simply add the `<PageTileEditor />` wherever you want the user to be able to gen
 <PageTileEditor v-model='page.content' />
 ```
 
-#### Optional TinyMCE integration
+#### Saving the page content
+
+The page content is just an object, so it can easily be stringified into JSON and saved to your database. When fetching the page content, just replace the reactive object and you're good to go!
+
+### Optional TinyMCE integration
 
 The package includes an optional integration with TinyMCE - one of the best WYSIWYG Rich Text Editors. Enabling it will replace the standard paragraph textfield's with a feature-rich text editor. To enable it;
 
@@ -75,10 +79,6 @@ The package includes an optional integration with TinyMCE - one of the best WYSI
 ```
 <PageTiles :page='page' tinymce-enabled />
 ```
-
-#### Saving the page content
-
-The page content is just an object, so it can easily be stringified into JSON and saved to your database. When fetching the page content, just replace the reactive object and you're good to go!
 
 ## Changelog
 
