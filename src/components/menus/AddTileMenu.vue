@@ -18,18 +18,18 @@
         leave-to-class="transform opacity-0 scale-95"
       >
         <MenuItems
-          class="absolute left-1/2 transform -translate-x-1/2 z-10 mt-2 w-max origin-top-center rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+          class="absolute left-1/2 transform -translate-x-1/2 z-50 mt-2 w-max origin-top-center rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
           unmount
         >
           <div class="grid grid-cols-3 gap-2 p-2">
             <MenuItem
-              v-for="(tile, index) in tiles"
+              v-for="(tile, index) in menuTiles"
               :key="`tile-${tile.title}-${index}`"
             >
               <TileVariantsMenu
                 v-if="tile.variants && tile.variants.length >= 1"
                 :variants="tile.variants"
-                :variant-menu-key="tile.variantMenuKey!"
+                :tile-title="tile.title"
                 @add="(tile: TileTemplate) => $emit('add', tile)"
               >
                 <PopoverButton
@@ -60,6 +60,7 @@
 </template>
 
 <script setup lang="ts">
+import { BaseTransitionPropsValidators, computed } from "vue";
 import tiles from "../../tile-list";
 import {
   Menu,
@@ -73,4 +74,17 @@ import TileVariantsMenu from "./TileVariantsMenu.vue";
 import type { TileTemplate } from "../../interfaces";
 
 defineEmits(["add"]);
+const props = defineProps({
+  disableTiles: {
+    type: Array as () => String[],
+    required: false,
+    default: [],
+  },
+});
+
+const menuTiles = computed(() =>
+  props.disableTiles.length >= 1
+    ? tiles.filter((t) => !props.disableTiles.includes(t.title))
+    : tiles
+);
 </script>

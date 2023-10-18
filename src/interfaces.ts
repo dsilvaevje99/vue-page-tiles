@@ -1,10 +1,13 @@
 export interface Data {
   text?: string;
+  columns?: TileTemplate[][];
 }
 
 export interface Attributes {
   align?: "left" | "center" | "right";
-  width?: number;
+  width?: string;
+  height?: string;
+  gap?: number;
   fontWeight?:
     | "thin"
     | "extralight"
@@ -35,7 +38,7 @@ export interface Attributes {
 export interface TileTemplate {
   display: Object;
   edit: Object;
-  data: Data;
+  data?: Data;
   attributes?: Attributes;
 }
 
@@ -44,7 +47,6 @@ export interface Tile {
   icon: Object;
   template: TileTemplate;
   variants?: TileTemplate[];
-  variantMenuKey?: string;
 }
 
 export interface PageContent {

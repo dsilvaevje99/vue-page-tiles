@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-col">
+  <div class="flex flex-col">
     <div
       v-for="(variant, index) in HEADING_VARIANTS"
       :key="`tile-heading-variant-${index}`"
@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { HEADING_VARIANTS } from "../../tile-list";
+import { HEADING_VARIANTS } from "../../../tile-list";
 
 defineEmits(["add"]);
 </script>

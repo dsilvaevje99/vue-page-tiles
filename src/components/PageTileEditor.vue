@@ -1,12 +1,8 @@
 <template>
-  <div
-    id="vue-page-tiles-edit-container"
-    class="flex flex-col w-full"
-    v-if="modelValue.length > 0"
-  >
+  <div class="flex flex-col w-full" v-if="modelValue.length > 0">
     <div
       v-for="(component, index) in modelValue"
-      :key="index"
+      :key="`tile-${index}`"
       class="p-10 pt-0 group"
     >
       <div
@@ -17,25 +13,23 @@
           :is="component.edit"
           :state="modelValue"
           :index="index"
+          :tinymce-api-key="tinymceApiKey"
           @update="(content: TileTemplate) => handleContentChanged(content, index)"
         ></component>
         <tile-actions
           class="hidden group-hover:block"
           @add="(tile: TileTemplate) => handleAddTile(tile, index)"
           @delete="() => handleDeleteTile(index)"
+          :disable-tiles="disableTiles"
         />
       </div>
     </div>
   </div>
-  <div
-    id="vue-page-tiles-edit-container"
-    class="flex flex-col w-full items-center p-10"
-    v-else
-  >
+  <div class="flex flex-col w-full items-center p-10" v-else>
     <p class="text-xl font-bold text-center text-gray-400 mb-4">
       Start by adding your first tile
     </p>
-    <add-tile-menu @add="handleAddTile" />
+    <add-tile-menu @add="handleAddTile" :disable-tiles="disableTiles" />
   </div>
 </template>
 
@@ -49,9 +43,16 @@ const props = defineProps({
   modelValue: {
     type: Array as () => TileTemplate[],
     required: true,
-    default: {
-      content: [],
-    },
+  },
+  disableTiles: {
+    type: Array as () => String[],
+    required: false,
+    default: [],
+  },
+  tinymceApiKey: {
+    type: String,
+    required: false,
+    default: import.meta.env.VITE_TINYMCE_API_KEY,
   },
   //customComponents: Array, <- can maybe be added later? It works, but components would have to be available both in edit and display apps
 });
@@ -73,3 +74,9 @@ const handleContentChanged = (newContent: TileTemplate, index: number) => {
   emit("update:modelValue", copy);
 };
 </script>
+
+<style>
+.tox-editor-container {
+  z-index: 50 !important;
+}
+</style>

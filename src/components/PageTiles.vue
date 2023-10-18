@@ -6,6 +6,7 @@
       :is="tile.display"
       :data="tile.data"
       :attributes="tile.attributes"
+      :tinymce-enabled="tinymceEnabled"
     ></component>
   </div>
   <div v-else>
@@ -22,6 +23,11 @@ defineProps({
   page: {
     type: Object as () => PageContent,
     required: true,
+  },
+  tinymceEnabled: {
+    type: Boolean,
+    required: false,
+    default: false,
   },
 });
 </script>
