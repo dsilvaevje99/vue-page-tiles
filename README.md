@@ -74,7 +74,7 @@ The package includes an optional integration with TinyMCE - one of the best WYSI
 <PageTileEditor v-model='page.content' :tinymce-api-key='YOUR_API_KEY_VARIABLE' />
 ```
 
-4. Set the prop `tinymce-enabled` on the `<PageTiles />` component as so:
+4. Add the prop `tinymce-enabled` to the `<PageTiles />` component as so:
 
 ```
 <PageTiles :page='page' tinymce-enabled />
