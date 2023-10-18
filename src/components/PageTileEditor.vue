@@ -13,6 +13,7 @@
           :is="component.edit"
           :state="modelValue"
           :index="index"
+          :tinymce-api-key="tinymceApiKey"
           @update="(content: TileTemplate) => handleContentChanged(content, index)"
         ></component>
         <tile-actions
@@ -48,6 +49,11 @@ const props = defineProps({
     required: false,
     default: [],
   },
+  tinymceApiKey: {
+    type: String,
+    required: false,
+    default: import.meta.env.VITE_TINYMCE_API_KEY,
+  },
   //customComponents: Array, <- can maybe be added later? It works, but components would have to be available both in edit and display apps
 });
 
@@ -68,3 +74,9 @@ const handleContentChanged = (newContent: TileTemplate, index: number) => {
   emit("update:modelValue", copy);
 };
 </script>
+
+<style>
+.tox-editor-container {
+  z-index: 50 !important;
+}
+</style>

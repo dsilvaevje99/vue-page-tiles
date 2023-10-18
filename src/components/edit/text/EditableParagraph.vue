@@ -1,5 +1,19 @@
 <template>
+  <Editor
+    v-if="tinymceApiKey"
+    v-model="value"
+    :api-key="tinymceApiKey"
+    :init="{
+      plugins: 'lists link image table',
+      menubar: 'edit view insert format table',
+      toolbar:
+        'undo redo | blocks forecolor bold italic underline blockquote link removeformat | bullist numlist | alignleft aligncenter alignright alignjustify | image table',
+      placeholder: 'Click to edit paragraph',
+    }"
+    :inline="true"
+  />
   <textarea
+    v-else
     v-model="value"
     class="p-2 w-full"
     placeholder="Click to edit paragraph"
@@ -10,6 +24,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import type { TileTemplate } from "../../../interfaces";
+import Editor from "@tinymce/tinymce-vue";
 
 const props = defineProps({
   state: {
@@ -19,6 +34,11 @@ const props = defineProps({
   index: {
     type: Number,
     required: true,
+  },
+  tinymceApiKey: {
+    type: String,
+    required: false,
+    default: import.meta.env.VITE_TINYMCE_API_KEY,
   },
 });
 
