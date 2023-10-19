@@ -12,11 +12,12 @@ This package let's you setup a Vue project where a user can generate page conten
 - Paragraph
 - Columns
 - Vertical spacer
+- Banners
 
 ### Coming soon:
 
-- Banners
 - Media (Images & videos)
+- Accordions
 
 ## Installation and usage
 
@@ -58,13 +59,21 @@ Simply add the `<PageTileEditor />` wherever you want the user to be able to gen
 <PageTileEditor v-model='page.content' />
 ```
 
+#### IMPORTANT! Including styles
+
+Remember to include the generated CSS from the package by importing it into your project's `main.css` file. Otherwise the package will not function correctly.
+
+````
+@import url("vue-page-tiles/dist/style.css");
+```
+
 #### Saving the page content
 
 The page content is just an object, so it can easily be stringified into JSON and saved to your database. When fetching the page content, just replace the reactive object and you're good to go!
 
 ### Optional TinyMCE integration
 
-The package includes an optional integration with TinyMCE - one of the best WYSIWYG Rich Text Editors. Enabling it will replace the standard paragraph textfield's with a feature-rich text editor. To enable it;
+This package includes an optional integration with TinyMCE - one of the best WYSIWYG Rich Text Editors. Enabling it will replace the standard paragraph textfield's with a feature-rich text editor. To enable it;
 
 1. Go to [https://www.tiny.cloud](https://www.tiny.cloud) and create a free account
 2. Update your approved domains to include your site, and copy the generated API key
@@ -83,3 +92,4 @@ The package includes an optional integration with TinyMCE - one of the best WYSI
 ## Changelog
 
 Details changed for each release are documented in the [release notes](https://github.com/dsilvaevje99/vue-page-tiles/releases/).
+````

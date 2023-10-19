@@ -1,5 +1,5 @@
 <template>
-  <PageTiles :page="testState" />
+  <PageTiles :page="testState" tinymce-enabled />
   <div class="py-1 my-6 bg-gray-400"></div>
   <PageTileEditor v-model="testState.content" />
 </template>

@@ -5,10 +5,14 @@ import {
   PARAGRAPH_TEMPLATE,
   VERTICAL_SPACER_TEMPLATE,
   COLUMNS_TEMPLATE,
+  BANNER_TEMPLATE,
 } from "./tile-templates";
 
 import { Bars3BottomLeftIcon, ArrowsUpDownIcon } from "@heroicons/vue/20/solid";
-import { ViewColumnsIcon } from "@heroicons/vue/24/outline";
+import {
+  ViewColumnsIcon,
+  ExclamationTriangleIcon,
+} from "@heroicons/vue/24/outline";
 import { HeaderIcon } from "./assets/custom-icons";
 
 export const HEADING_VARIANTS = [
@@ -24,6 +28,11 @@ export const COLUMNS_VARIANTS = [
   { columns: [[], []] },
   { columns: [[], [], []] },
   { columns: [[], [], [], []] },
+];
+
+export const BANNER_VARIANTS = [
+  { bannerType: "info" },
+  { bannerType: "warning" },
 ];
 
 export default <Tile[]>[
@@ -57,6 +66,17 @@ export default <Tile[]>[
       ...COLUMNS_TEMPLATE,
       data: {
         columns,
+      },
+    })),
+  },
+  {
+    title: "Banner",
+    icon: ExclamationTriangleIcon,
+    template: BANNER_TEMPLATE,
+    variants: BANNER_VARIANTS.map(({ bannerType }) => ({
+      ...BANNER_TEMPLATE,
+      attributes: {
+        bannerType,
       },
     })),
   },

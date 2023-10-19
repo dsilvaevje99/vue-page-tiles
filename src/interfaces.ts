@@ -33,11 +33,12 @@ export interface Attributes {
     | "8xl"
     | "9xl";
   headerType?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+  bannerType?: "warning" | "info";
 }
 
 export interface TileTemplate {
   display: Object;
-  edit: Object;
+  edit: () => Object;
   data?: Data;
   attributes?: Attributes;
 }
