@@ -18,6 +18,7 @@ This package let's you setup a Vue project where a user can generate page conten
 
 - Media (Images & videos)
 - Accordions
+- Tables
 
 ## Installation and usage
 
@@ -34,7 +35,7 @@ The package exports 2 components, `<PageTiles />` and `<PageTileEditor />`.
 
 #### How to display page content
 
-First, create the reactive object which will hold the page content, it must have a key called "content" which should be set to an empty array as so:
+First, create the reactive object which will hold the page content, it must have a property called "content" which should be set to an empty array as so:
 
 ```
 import {reactive} from 'vue'
@@ -44,8 +45,8 @@ const page = reactive({
 })
 ```
 
-This reactive object will be used when generating the page content as well, so make sure to create it in a component they have in common.
-Then insert the `<PageTiles />` component wherever you want the page content to be displayed, and pass the reactive object you just created as a prop called "page":
+An identical reactive object will be used when generating the page content as well, so if you've combined both the editor and displayed content into the same project make sure to create the reactive object somewhere both components can access it.
+Proceed to insert the `<PageTiles />` component wherever you want the page content to be displayed, and pass the reactive object you just created as a prop called "page":
 
 ```
 <PageTiles :page='page' />
@@ -77,7 +78,7 @@ This package includes an optional integration with TinyMCE - one of the best WYS
 
 1. Go to [https://www.tiny.cloud](https://www.tiny.cloud) and create a free account
 2. Update your approved domains to include your site, and copy the generated API key
-3. Save the API key in an environment variable, and pass it to the `<PageTileEditor />` component as so:
+3. Store the API key in an environment variable, and pass it to the `<PageTileEditor />` component as so:
 
 ```
 <PageTileEditor v-model='page.content' :tinymce-api-key='YOUR_API_KEY_VARIABLE' />
