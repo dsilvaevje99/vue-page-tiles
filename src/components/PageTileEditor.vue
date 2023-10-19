@@ -10,7 +10,7 @@
       >
         <component
           class="bg-transparent"
-          :is="component.edit"
+          :is="component.edit()"
           :state="modelValue"
           :index="index"
           :tinymce-api-key="tinymceApiKey"
@@ -35,6 +35,7 @@
 
 <script setup lang="ts">
 import "../style.css"; // needed for CSS to be included in build
+import { markRaw } from "vue";
 import TileActions from "./menus/TileActions.vue";
 import AddTileMenu from "./menus/AddTileMenu.vue";
 import type { TileTemplate } from "../interfaces";

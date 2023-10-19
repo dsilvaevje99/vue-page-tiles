@@ -15,3 +15,10 @@ defineProps({
   },
 });
 </script>
+
+<script lang="ts">
+// this prevents a console warning for not including attributes in props
+export default {
+  inheritAttrs: false,
+};
+</script>
