@@ -1,5 +1,9 @@
 <template>
-  <div v-if="page.content.length > 0" class="flex flex-col w-full">
+  <div
+    v-if="page.content.length > 0"
+    id="page-tile-displayer"
+    class="flex flex-col w-full"
+  >
     <component
       v-for="(tile, index) in page.content"
       :key="`tile-d-${index}`"

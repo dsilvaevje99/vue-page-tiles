@@ -27,16 +27,24 @@
   }
 
   ul,
-  ol {
+  ol,
+  #page-tile-displayer ul,
+  #page-tile-displayer ol,
+  .page-tile-editor ul,
+  .page-tile-editor ol {
     margin: 0;
     padding: 0 0 0 1em;
   }
 
-  ul {
+  ul,
+  #page-tile-displayer ul,
+  .page-tile-editor ul {
     @apply list-disc;
   }
 
-  ol {
+  ol,
+  #page-tile-displayer ol,
+  .page-tile-editor ol {
     @apply list-decimal;
   }
 

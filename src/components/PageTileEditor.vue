@@ -1,5 +1,8 @@
 <template>
-  <div class="flex flex-col w-full" v-if="modelValue.length > 0">
+  <div
+    v-if="modelValue.length > 0"
+    class="page-tile-editor flex flex-col w-full"
+  >
     <div
       v-for="(component, index) in modelValue"
       :key="`tile-${index}`"
@@ -25,7 +28,7 @@
       </div>
     </div>
   </div>
-  <div class="flex flex-col w-full items-center p-10" v-else>
+  <div v-else class="flex flex-col w-full items-center p-10">
     <p class="text-xl font-bold text-center text-gray-400 mb-4">
       Start by adding your first tile
     </p>
