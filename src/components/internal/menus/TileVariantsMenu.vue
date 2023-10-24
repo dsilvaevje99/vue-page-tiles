@@ -37,7 +37,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { TileTemplate } from "../../interfaces";
+import { TileTemplate } from "../../../interfaces";
 import HeadingVariantOptions from "./variants/HeadingVariantOptions.vue";
 import { Popover, PopoverPanel } from "@headlessui/vue";
 import ColumnVariantOptions from "./variants/ColumnVariantOptions.vue";
