@@ -72,9 +72,20 @@ Remember to include the generated CSS from the package by importing it into your
 
 The page content is just an object, so it can easily be stringified into JSON and saved to your database. When fetching the page content, just replace the reactive object and you're good to go!
 
+### i18n
+
+If your project uses any kind of internationalization, you can configure the package to allow users to add translated text for all components with written content. To do so, go to the reactive object containing the page content and add a propterty called `localeConfig`, which should be an object containing mandatory properties `locales` (a string[]) and `currLocale` (a string). By default a locale switcher will be rendered inside the `<PageTileEditor />` component, but if you wish to implement your own you can add the property `hideLocaleSwitcher: true` to the `localeConfig` object and change the `currLocale` property manually. Here is an example of what your reactive object should look like with i18n configured:
+
+```
+const page = reactive({
+  content: [],
+  localeConfig: { locales: ["en", "es", "fr"], currLocale: "en" },
+});
+```
+
 ### Optional TinyMCE integration
 
-This package includes an optional integration with TinyMCE - one of the best WYSIWYG Rich Text Editors. Enabling it will replace the standard paragraph textfield's with a feature-rich text editor. To enable it;
+This package includes an optional integration with TinyMCE - one of the best WYSIWYG Rich Text Editors. Enabling it will replace standard input fields with a feature-rich text editor. To enable it;
 
 1. Go to [https://www.tiny.cloud](https://www.tiny.cloud) and create a free account
 2. Update your approved domains to include your site, and copy the generated API key

@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { BANNER_VARIANTS } from "../../../tile-list";
+import { BANNER_VARIANTS } from "../../../../tile-list";
 
 defineEmits(["add"]);
 </script>

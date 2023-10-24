@@ -10,6 +10,7 @@
         :data="tile.data"
         :attributes="tile.attributes"
         :tinymce-enabled="tinymceEnabled"
+        :locale="locale"
       ></component>
     </div>
   </div>
@@ -26,6 +27,10 @@ const props = defineProps({
     type: Boolean,
     required: false,
     default: false,
+  },
+  locale: {
+    type: String,
+    required: false,
   },
 });
 

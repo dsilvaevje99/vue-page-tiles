@@ -1,5 +1,9 @@
+export interface TextLocale {
+  [locale: string]: string;
+}
+
 export interface Data {
-  text?: string;
+  text?: string | TextLocale;
   columns?: TileTemplate[][];
 }
 
@@ -52,4 +56,10 @@ export interface Tile {
 
 export interface PageContent {
   content: TileTemplate[];
+}
+
+export interface LocaleConfig {
+  locales: String[];
+  currLocale: String;
+  hideLocaleSwitcher?: boolean;
 }

@@ -1,10 +1,15 @@
 <template>
-  <div v-if="tinymceEnabled" v-html="data?.text"></div>
-  <p v-else class="text-ellipsis overflow-hidden">{{ data?.text }}</p>
+  <div
+    v-if="tinymceEnabled"
+    v-html="locale ? (data?.text as TextLocale)[locale] : data?.text"
+  ></div>
+  <p v-else class="text-ellipsis overflow-hidden">
+    {{ locale ? (data?.text as TextLocale)[locale] : data?.text }}
+  </p>
 </template>
 
 <script setup lang="ts">
-import { Data } from "../../../interfaces";
+import { Data, TextLocale } from "../../../interfaces";
 
 defineProps({
   data: Object as () => Data,
@@ -12,6 +17,10 @@ defineProps({
     type: Boolean,
     required: false,
     default: false,
+  },
+  locale: {
+    type: String,
+    required: false,
   },
 });
 </script>

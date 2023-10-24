@@ -1,14 +1,18 @@
 <template>
   <div class="grid grid-flow-row sm:grid-flow-col sm:auto-cols-fr">
     <div v-for="(_, index) in columns" :key="`col-${index}`">
-      <PageTileEditor v-model="value[index]" :disable-tiles="['Columns']" />
+      <PageTileEditor
+        v-model="value[index]"
+        :disable-tiles="['Columns']"
+        :locale-config="newLocaleConfig"
+      />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, reactive, watch } from "vue";
-import type { TileTemplate } from "../../../interfaces";
+import type { LocaleConfig, TileTemplate } from "../../../interfaces";
 import { PageTileEditor } from "../../..";
 
 const props = defineProps({
@@ -19,6 +23,10 @@ const props = defineProps({
   index: {
     type: Number,
     required: true,
+  },
+  localeConfig: {
+    type: Object as () => LocaleConfig,
+    required: false,
   },
 });
 
@@ -40,6 +48,11 @@ const columns = computed({
     });
   },
 });
+const newLocaleConfig = computed(() =>
+  props.localeConfig
+    ? { ...props.localeConfig, hideLocaleSwitcher: true }
+    : undefined
+);
 
 const value: TileTemplate[][] = reactive(
   JSON.parse(JSON.stringify(columns.value)) // deep copy required to prevent weird mutation issues

@@ -60,8 +60,8 @@
 </template>
 
 <script setup lang="ts">
-import { BaseTransitionPropsValidators, computed } from "vue";
-import tiles from "../../tile-list";
+import { computed } from "vue";
+import tiles from "../../../tile-list";
 import {
   Menu,
   MenuButton,
@@ -71,7 +71,7 @@ import {
 } from "@headlessui/vue";
 import { PlusIcon } from "@heroicons/vue/20/solid";
 import TileVariantsMenu from "./TileVariantsMenu.vue";
-import type { TileTemplate } from "../../interfaces";
+import type { TileTemplate } from "../../../interfaces";
 
 defineEmits(["add"]);
 const props = defineProps({

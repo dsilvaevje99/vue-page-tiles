@@ -1,17 +1,21 @@
 <template>
-  <div
-    contenteditable
-    placeholder="Click to edit heading"
-    :class="`p-2 text-${fontSize} w-auto min-w-[20rem] max-w-full text-${alignment} self-${alignment}`"
-    @input="(e) => (value = (e.target as HTMLDivElement).innerText)"
-  >
-    {{ value }}
+  <div class="flex flex-col">
+    <div
+      contenteditable
+      placeholder="Click to edit heading"
+      :class="`p-2 text-${fontSize} w-auto min-w-[20rem] max-w-full text-${alignment} self-${alignment}`"
+      @input="(e) => (value = (e.target as HTMLDivElement).innerText)"
+    >
+      {{ value }}
+    </div>
+    <LangAccordion v-if="otherLocale" :locale="otherLocale" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue";
-import type { TileTemplate } from "../../../interfaces";
+import type { TileTemplate, TextLocale } from "../../../interfaces";
+import LangAccordion from "../../internal/LangAccordion.vue";
 
 const props = defineProps({
   state: {
@@ -22,6 +26,10 @@ const props = defineProps({
     type: Number,
     required: true,
   },
+  locale: {
+    type: String,
+    required: false,
+  },
 });
 
 const emit = defineEmits(["update"]);
@@ -29,7 +37,9 @@ const emit = defineEmits(["update"]);
 const tile = computed(() => props.state[props.index]);
 const value = computed({
   get() {
-    return tile.value.data?.text || "";
+    return props.locale
+      ? (tile.value.data?.text as TextLocale)[props.locale] || ""
+      : (tile.value.data?.text as string) || "";
   },
   set(newVal: string) {
     const oldItem = tile.value;
@@ -37,10 +47,19 @@ const value = computed({
       ...oldItem,
       data: {
         ...oldItem.data,
-        text: newVal,
+        text: props.locale
+          ? { ...(oldItem.data?.text as TextLocale), [props.locale]: newVal }
+          : newVal,
       },
     });
   },
+});
+const otherLocale = computed(() => {
+  const found = Object.keys(tile.value.data?.text as TextLocale).find(
+    (locale) => locale !== props.locale
+  );
+  if (found && (tile.value.data?.text as TextLocale)[found])
+    return [found, (tile.value.data?.text as TextLocale)[found]];
 });
 const alignment = computed(() => tile.value.attributes?.align || "center");
 const fontSize = computed(() => tile.value.attributes?.fontSize || "4xl");

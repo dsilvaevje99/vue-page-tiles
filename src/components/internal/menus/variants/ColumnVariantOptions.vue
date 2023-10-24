@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { COLUMNS_VARIANTS } from "../../../tile-list";
+import { COLUMNS_VARIANTS } from "../../../../tile-list";
 
 defineEmits(["add"]);
 </script>

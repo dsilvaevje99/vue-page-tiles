@@ -3,6 +3,15 @@
     v-if="modelValue.length > 0"
     class="page-tile-editor flex flex-col w-full"
   >
+    <LangSwitcher
+      v-if="
+        localeConfig &&
+        localeConfig.locales.length >= 2 &&
+        !localeConfig.hideLocaleSwitcher
+      "
+      :locale-config="localeConfig"
+      @change="(locale: string) => (localeConfig as LocaleConfig).currLocale = locale"
+    />
     <div
       v-for="(component, index) in modelValue"
       :key="`tile-${index}`"
@@ -17,6 +26,8 @@
           :state="modelValue"
           :index="index"
           :tinymce-api-key="tinymceApiKey"
+          :locale="localeConfig?.currLocale"
+          :locale-config="localeConfig"
           @update="(content: TileTemplate) => handleContentChanged(content, index)"
         ></component>
         <tile-actions
@@ -38,10 +49,10 @@
 
 <script setup lang="ts">
 import "../style.css"; // needed for CSS to be included in build
-import { markRaw } from "vue";
-import TileActions from "./menus/TileActions.vue";
-import AddTileMenu from "./menus/AddTileMenu.vue";
-import type { TileTemplate } from "../interfaces";
+import TileActions from "./internal/menus/TileActions.vue";
+import AddTileMenu from "./internal/menus/AddTileMenu.vue";
+import LangSwitcher from "./internal/LangSwitcher.vue";
+import type { TileTemplate, LocaleConfig } from "../interfaces";
 
 const props = defineProps({
   modelValue: {
@@ -57,6 +68,10 @@ const props = defineProps({
     type: String,
     required: false,
     default: import.meta.env.VITE_TINYMCE_API_KEY,
+  },
+  localeConfig: {
+    type: Object as () => LocaleConfig,
+    required: false,
   },
   //customComponents: Array, <- can maybe be added later? It works, but components would have to be available both in edit and display apps
 });

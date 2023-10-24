@@ -11,6 +11,7 @@
       :data="tile.data"
       :attributes="tile.attributes"
       :tinymce-enabled="tinymceEnabled"
+      :locale="locale"
     ></component>
   </div>
   <div v-else>
@@ -32,6 +33,10 @@ defineProps({
     type: Boolean,
     required: false,
     default: false,
+  },
+  locale: {
+    type: String,
+    required: false,
   },
 });
 </script>

@@ -6,14 +6,20 @@
   >
     <InformationCircleIcon v-if="bannerType === 'info'" class="h-6 w-6" />
     <ExclamationTriangleIcon v-else class="h-6 w-6" />
-    <div v-if="tinymceEnabled" class="flex-1 ml-4" v-html="data.text"></div>
-    <p v-else class="flex-1 ml-4">{{ data.text }}</p>
+    <div
+      v-if="tinymceEnabled"
+      class="flex-1 ml-4"
+      v-html="locale ? (data?.text as TextLocale)[locale] : data?.text"
+    ></div>
+    <p v-else class="flex-1 ml-4">
+      {{ locale ? (data?.text as TextLocale)[locale] : data?.text }}
+    </p>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { Attributes, Data } from "../../../interfaces";
+import { Attributes, Data, TextLocale } from "../../../interfaces";
 import {
   InformationCircleIcon,
   ExclamationTriangleIcon,
@@ -32,6 +38,10 @@ const props = defineProps({
     type: Boolean,
     required: false,
     default: false,
+  },
+  locale: {
+    type: String,
+    required: false,
   },
 });
 

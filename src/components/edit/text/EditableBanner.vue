@@ -29,17 +29,23 @@
         rows="2"
       ></textarea>
     </div>
+    <LangAccordion
+      v-if="otherLocale"
+      :locale="otherLocale"
+      :tinymce-enabled="!!tinymceApiKey"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue";
-import type { TileTemplate } from "../../../interfaces";
+import type { TextLocale, TileTemplate } from "../../../interfaces";
 import {
   InformationCircleIcon,
   ExclamationTriangleIcon,
 } from "@heroicons/vue/24/outline";
 import Editor from "@tinymce/tinymce-vue";
+import LangAccordion from "../../internal/LangAccordion.vue";
 
 const props = defineProps({
   state: {
@@ -55,6 +61,10 @@ const props = defineProps({
     required: false,
     default: import.meta.env.VITE_TINYMCE_API_KEY,
   },
+  locale: {
+    type: String,
+    required: false,
+  },
 });
 
 const emit = defineEmits(["update"]);
@@ -62,7 +72,9 @@ const emit = defineEmits(["update"]);
 const tile = computed(() => props.state[props.index]);
 const value = computed({
   get() {
-    return tile.value.data?.text || "";
+    return props.locale
+      ? (tile.value.data?.text as TextLocale)[props.locale] || ""
+      : (tile.value.data?.text as string) || "";
   },
   set(newVal: string) {
     const oldItem = tile.value;
@@ -70,10 +82,18 @@ const value = computed({
       ...oldItem,
       data: {
         ...oldItem.data,
-        text: newVal,
+        text: props.locale
+          ? { ...(oldItem.data?.text as TextLocale), [props.locale]: newVal }
+          : newVal,
       },
     });
   },
 });
 const bannerType = computed(() => tile.value.attributes?.bannerType || "info");
+const otherLocale = computed(() => {
+  const found = Object.keys(tile.value.data?.text as TextLocale).find(
+    (locale) => locale !== props.locale
+  );
+  if (found) return [found, (tile.value.data?.text as TextLocale)[found]];
+});
 </script>
