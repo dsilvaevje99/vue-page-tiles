@@ -64,7 +64,7 @@ Simply add the `<PageTileEditor />` wherever you want the user to be able to gen
 
 Remember to include the generated CSS from the package by importing it into your project's `main.css` file. Otherwise the package will not function correctly.
 
-````
+```
 @import url("vue-page-tiles/dist/style.css");
 ```
 
@@ -74,14 +74,26 @@ The page content is just an object, so it can easily be stringified into JSON an
 
 ### i18n
 
-If your project uses any kind of internationalization, you can configure the package to allow users to add translated text for all components with written content. To do so, go to the reactive object containing the page content and add a propterty called `localeConfig`, which should be an object containing mandatory properties `locales` (a string[]) and `currLocale` (a string). By default a locale switcher will be rendered inside the `<PageTileEditor />` component, but if you wish to implement your own you can add the property `hideLocaleSwitcher: true` to the `localeConfig` object and change the `currLocale` property manually. Here is an example of what your reactive object should look like with i18n configured:
-
+If your project uses any kind of internationalization, you can configure the package to allow users to add translated text for all components with written content. To do so;
+1. go to the reactive object containing the page content and add a propterty called `localeConfig`, which should be an object containing mandatory properties `locales` and `currLocale`. It should look like this:
 ```
 const page = reactive({
   content: [],
   localeConfig: { locales: ["en", "es", "fr"], currLocale: "en" },
 });
 ```
+2. Pass the object to the `<PageTileEditor />` component in a prop called `locale-config` as so:
+```
+<PageTileEditor ... :locale-config='page.localeConfig' />
+```
+3. Pass the `currLocale` property to the `<PageTiles />` component in a prop called `locale`as so:
+```
+<PageTiles ... :locale='page.localeConfig.currLocale' />
+```
+
+By default a locale switcher component will be rendered inside the `<PageTileEditor />`, but if you wish to implement your own you can add the property `hideLocaleSwitcher: true` to the `localeConfig` object and switch the `currLocale` property manually. 
+
+Note that i18n support currently only applies to text content created by the user, and not package text such as tile names and placeholders.
 
 ### Optional TinyMCE integration
 
