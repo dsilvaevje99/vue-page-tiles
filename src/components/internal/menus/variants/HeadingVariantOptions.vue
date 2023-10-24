@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { HEADING_VARIANTS } from "../../../tile-list";
+import { HEADING_VARIANTS } from "../../../../tile-list";
 
 defineEmits(["add"]);
 </script>

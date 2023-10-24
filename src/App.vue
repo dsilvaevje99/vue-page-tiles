@@ -1,7 +1,14 @@
 <template>
-  <PageTiles :page="testState" />
+  <PageTiles
+    :page="testState"
+    tinymce-enabled
+    :locale="testState.localeConfig.currLocale"
+  />
   <div class="py-1 my-6 bg-gray-400"></div>
-  <PageTileEditor v-model="testState.content" />
+  <PageTileEditor
+    v-model="testState.content"
+    :locale-config="testState.localeConfig"
+  />
 </template>
 
 <script setup lang="ts">
@@ -11,5 +18,6 @@ import PageTiles from "./components/PageTiles.vue";
 
 const testState = reactive({
   content: [],
+  localeConfig: { locales: ["no", "es", "en"], currLocale: "no" },
 });
 </script>

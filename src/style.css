@@ -3,8 +3,49 @@
 @tailwind utilities;
 
 @layer base {
+  h1 {
+    @apply text-4xl;
+  }
+  h2 {
+    @apply text-2xl;
+  }
+  h3 {
+    @apply text-xl;
+  }
+  h4 {
+    @apply text-lg;
+  }
+  h5 {
+    @apply text-base;
+  }
+  h6 {
+    @apply text-sm;
+  }
+
   button {
     @apply base-transition;
+  }
+
+  ul,
+  ol,
+  #page-tile-displayer ul,
+  #page-tile-displayer ol,
+  .page-tile-editor ul,
+  .page-tile-editor ol {
+    margin: 0;
+    padding: 0 0 0 1em;
+  }
+
+  ul,
+  #page-tile-displayer ul,
+  .page-tile-editor ul {
+    @apply list-disc;
+  }
+
+  ol,
+  #page-tile-displayer ol,
+  .page-tile-editor ol {
+    @apply list-decimal;
   }
 
   [contenteditable]:not(:focus):empty:before {

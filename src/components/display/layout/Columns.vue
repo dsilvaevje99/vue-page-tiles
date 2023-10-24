@@ -6,9 +6,11 @@
       <component
         v-for="tile in col"
         :key="`col-tile-d-${index}`"
-        :is="tile.display"
+        :is="{ ...tile.display }"
         :data="tile.data"
         :attributes="tile.attributes"
+        :tinymce-enabled="tinymceEnabled"
+        :locale="locale"
       ></component>
     </div>
   </div>
@@ -21,6 +23,15 @@ import type { Attributes, Data } from "../../../interfaces";
 const props = defineProps({
   data: Object as () => Data,
   attributes: Object as () => Attributes,
+  tinymceEnabled: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+  locale: {
+    type: String,
+    required: false,
+  },
 });
 
 const columns = computed(() => props.data?.columns);

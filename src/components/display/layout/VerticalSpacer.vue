@@ -14,3 +14,10 @@ const height = computed(() =>
   props.attributes?.height ? props.attributes.height : 0
 );
 </script>
+
+<script lang="ts">
+// this prevents a console warning for not including data in props
+export default {
+  inheritAttrs: false,
+};
+</script>

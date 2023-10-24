@@ -15,7 +15,10 @@
           <HeadingVariantOptions @add="handleAddHeaderVariant" />
         </div>
         <div v-else-if="tileTitle === 'Columns'">
-          <ColumnVariantOptions @add="handleAddColumnVariant" />
+          <ColumnVariantOptions @add="handleAddSimpleVariant" />
+        </div>
+        <div v-else-if="tileTitle === 'Banner'">
+          <BannerVariantOptions @add="handleAddSimpleVariant" />
         </div>
         <div v-else class="flex flex-col">
           <div v-for="(tile, index) in variants" :key="`tile-variant-${index}`">
@@ -34,10 +37,11 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { Attributes, TileTemplate } from "../../interfaces";
+import { TileTemplate } from "../../interfaces";
 import HeadingVariantOptions from "./variants/HeadingVariantOptions.vue";
 import { Popover, PopoverPanel } from "@headlessui/vue";
 import ColumnVariantOptions from "./variants/ColumnVariantOptions.vue";
+import BannerVariantOptions from "./variants/BannerVariantOptions.vue";
 
 const props = defineProps({
   variants: {
@@ -61,7 +65,7 @@ const handleAddHeaderVariant = (variant: String) => {
   if (template) emit("add", template);
 };
 
-const handleAddColumnVariant = (index: number) => {
+const handleAddSimpleVariant = (index: number) => {
   const template = props.variants[index];
   if (template) emit("add", template);
 };

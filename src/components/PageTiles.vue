@@ -1,12 +1,17 @@
 <template>
-  <div v-if="page.content.length > 0" class="flex flex-col w-full">
+  <div
+    v-if="page.content.length > 0"
+    id="page-tile-displayer"
+    class="flex flex-col w-full"
+  >
     <component
       v-for="(tile, index) in page.content"
       :key="`tile-d-${index}`"
-      :is="tile.display"
+      :is="{ ...tile.display }"
       :data="tile.data"
       :attributes="tile.attributes"
       :tinymce-enabled="tinymceEnabled"
+      :locale="locale"
     ></component>
   </div>
   <div v-else>
@@ -28,6 +33,10 @@ defineProps({
     type: Boolean,
     required: false,
     default: false,
+  },
+  locale: {
+    type: String,
+    required: false,
   },
 });
 </script>

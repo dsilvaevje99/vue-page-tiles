@@ -12,9 +12,12 @@ import EditableVerticalSpacer from "./components/edit/layout/EditableVerticalSpa
 import Columns from "./components/display/layout/Columns.vue";
 import EditableColumns from "./components/edit/layout/EditableColumns.vue";
 
+import Banner from "./components/display/text/Banner.vue";
+import EditableBanner from "./components/edit/text/EditableBanner.vue";
+
 export const HEADING_TEMPLATE: TileTemplate = {
   display: Heading,
-  edit: EditableHeading,
+  edit: () => EditableHeading,
   data: {
     text: "",
   },
@@ -22,7 +25,7 @@ export const HEADING_TEMPLATE: TileTemplate = {
 
 export const PARAGRAPH_TEMPLATE: TileTemplate = {
   display: Paragraph,
-  edit: EditableParagraph,
+  edit: () => EditableParagraph,
   data: {
     text: "",
   },
@@ -30,7 +33,7 @@ export const PARAGRAPH_TEMPLATE: TileTemplate = {
 
 export const VERTICAL_SPACER_TEMPLATE: TileTemplate = {
   display: VerticalSpacer,
-  edit: EditableVerticalSpacer,
+  edit: () => EditableVerticalSpacer,
   attributes: {
     height: "",
   },
@@ -38,11 +41,22 @@ export const VERTICAL_SPACER_TEMPLATE: TileTemplate = {
 
 export const COLUMNS_TEMPLATE: TileTemplate = {
   display: Columns,
-  edit: EditableColumns,
+  edit: () => EditableColumns,
   data: {
     columns: [[], []],
   },
   attributes: {
     gap: 8,
+  },
+};
+
+export const BANNER_TEMPLATE: TileTemplate = {
+  display: Banner,
+  edit: () => EditableBanner,
+  data: {
+    text: "",
+  },
+  attributes: {
+    bannerType: "info",
   },
 };

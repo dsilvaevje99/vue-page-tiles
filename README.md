@@ -12,11 +12,13 @@ This package let's you setup a Vue project where a user can generate page conten
 - Paragraph
 - Columns
 - Vertical spacer
+- Banners
 
 ### Coming soon:
 
-- Banners
 - Media (Images & videos)
+- Accordions
+- Tables
 
 ## Installation and usage
 
@@ -33,7 +35,7 @@ The package exports 2 components, `<PageTiles />` and `<PageTileEditor />`.
 
 #### How to display page content
 
-First, create the reactive object which will hold the page content, it must have a key called "content" which should be set to an empty array as so:
+First, create the reactive object which will hold the page content, it must have a property called "content" which should be set to an empty array as so:
 
 ```
 import {reactive} from 'vue'
@@ -43,8 +45,8 @@ const page = reactive({
 })
 ```
 
-This reactive object will be used when generating the page content as well, so make sure to create it in a component they have in common.
-Then insert the `<PageTiles />` component wherever you want the page content to be displayed, and pass the reactive object you just created as a prop called "page":
+An identical reactive object will be used when generating the page content as well, so if you've combined both the editor and displayed content into the same project make sure to create the reactive object somewhere both components can access it.
+Proceed to insert the `<PageTiles />` component wherever you want the page content to be displayed, and pass the reactive object you just created as a prop called "page":
 
 ```
 <PageTiles :page='page' />
@@ -58,17 +60,48 @@ Simply add the `<PageTileEditor />` wherever you want the user to be able to gen
 <PageTileEditor v-model='page.content' />
 ```
 
+#### IMPORTANT! Including styles
+
+Remember to include the generated CSS from the package by importing it into your project's `main.css` file. Otherwise the package will not function correctly.
+
+```
+@import url("vue-page-tiles/dist/style.css");
+```
+
 #### Saving the page content
 
 The page content is just an object, so it can easily be stringified into JSON and saved to your database. When fetching the page content, just replace the reactive object and you're good to go!
 
+### i18n
+
+If your project uses any kind of internationalization, you can configure the package to allow users to add translated text for all components with written content. To do so;
+1. go to the reactive object containing the page content and add a propterty called `localeConfig`, which should be an object containing mandatory properties `locales` and `currLocale`. It should look like this:
+```
+const page = reactive({
+  content: [],
+  localeConfig: { locales: ["en", "es", "fr"], currLocale: "en" },
+});
+```
+2. Pass the object to the `<PageTileEditor />` component in a prop called `locale-config` as so:
+```
+<PageTileEditor ... :locale-config='page.localeConfig' />
+```
+3. Pass the `currLocale` property to the `<PageTiles />` component in a prop called `locale`as so:
+```
+<PageTiles ... :locale='page.localeConfig.currLocale' />
+```
+
+By default a locale switcher component will be rendered inside the `<PageTileEditor />`, but if you wish to implement your own you can add the property `hideLocaleSwitcher: true` to the `localeConfig` object and switch the `currLocale` property manually. 
+
+Note that i18n support currently only applies to text content created by the user, and not package text such as tile names and placeholders.
+
 ### Optional TinyMCE integration
 
-The package includes an optional integration with TinyMCE - one of the best WYSIWYG Rich Text Editors. Enabling it will replace the standard paragraph textfield's with a feature-rich text editor. To enable it;
+This package includes an optional integration with TinyMCE - one of the best WYSIWYG Rich Text Editors. Enabling it will replace standard input fields with a feature-rich text editor. To enable it;
 
 1. Go to [https://www.tiny.cloud](https://www.tiny.cloud) and create a free account
 2. Update your approved domains to include your site, and copy the generated API key
-3. Save the API key in an environment variable, and pass it to the `<PageTileEditor />` component as so:
+3. Store the API key in an environment variable, and pass it to the `<PageTileEditor />` component as so:
 
 ```
 <PageTileEditor v-model='page.content' :tinymce-api-key='YOUR_API_KEY_VARIABLE' />
@@ -83,3 +116,4 @@ The package includes an optional integration with TinyMCE - one of the best WYSI
 ## Changelog
 
 Details changed for each release are documented in the [release notes](https://github.com/dsilvaevje99/vue-page-tiles/releases/).
+````

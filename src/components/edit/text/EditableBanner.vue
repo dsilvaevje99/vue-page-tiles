@@ -1,32 +1,38 @@
 <template>
-  <div :class="{ 'flex flex-wrap': otherLocale }">
-    <div :class="{ 'flex-1 min-w-[70%] mr-2 mb-1': otherLocale }">
-      <Editor
-        v-if="tinymceApiKey"
-        v-model="value"
-        :api-key="tinymceApiKey"
-        :init="{
-          plugins: 'lists link image table',
-          menubar: 'edit view insert format table',
-          toolbar:
-            'undo redo | blocks forecolor bold italic underline blockquote link removeformat | bullist numlist | alignleft aligncenter alignright alignjustify | image table',
-          placeholder: 'Click to edit paragraph',
-        }"
-        :inline="true"
-      />
+  <div>
+    <div
+      :class="`flex p-4 rounded-md ${
+        bannerType === 'info' ? 'bg-gray-300' : 'bg-yellow-200'
+      }`"
+    >
+      <InformationCircleIcon v-if="bannerType === 'info'" class="h-6 w-6" />
+      <ExclamationTriangleIcon v-else class="h-6 w-6" />
+      <div v-if="tinymceApiKey" class="flex-1 ml-4">
+        <Editor
+          v-model="value"
+          :api-key="tinymceApiKey"
+          :init="{
+            plugins: 'lists link',
+            menubar: '',
+            toolbar:
+              'undo redo | blocks forecolor bold italic underline link removeformat | bullist numlist | alignleft aligncenter alignright alignjustify',
+            placeholder: 'Click to edit banner',
+          }"
+          :inline="true"
+        />
+      </div>
       <textarea
         v-else
         v-model="value"
-        class="p-2 w-full"
-        placeholder="Click to edit paragraph"
-        rows="5"
+        class="flex-1 ml-4"
+        placeholder="Click to edit banner"
+        rows="2"
       ></textarea>
     </div>
     <LangAccordion
       v-if="otherLocale"
       :locale="otherLocale"
       :tinymce-enabled="!!tinymceApiKey"
-      class="mt-0"
     />
   </div>
 </template>
@@ -34,6 +40,10 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import type { TextLocale, TileTemplate } from "../../../interfaces";
+import {
+  InformationCircleIcon,
+  ExclamationTriangleIcon,
+} from "@heroicons/vue/24/outline";
 import Editor from "@tinymce/tinymce-vue";
 import LangAccordion from "../../internal/LangAccordion.vue";
 
@@ -79,6 +89,7 @@ const value = computed({
     });
   },
 });
+const bannerType = computed(() => tile.value.attributes?.bannerType || "info");
 const otherLocale = computed(() => {
   const found = Object.keys(tile.value.data?.text as TextLocale).find(
     (locale) => locale !== props.locale

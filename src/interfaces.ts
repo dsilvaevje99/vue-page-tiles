@@ -1,5 +1,9 @@
+export interface TextLocale {
+  [locale: string]: string;
+}
+
 export interface Data {
-  text?: string;
+  text?: string | TextLocale;
   columns?: TileTemplate[][];
 }
 
@@ -33,11 +37,12 @@ export interface Attributes {
     | "8xl"
     | "9xl";
   headerType?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+  bannerType?: "warning" | "info";
 }
 
 export interface TileTemplate {
   display: Object;
-  edit: Object;
+  edit: () => Object;
   data?: Data;
   attributes?: Attributes;
 }
@@ -51,4 +56,10 @@ export interface Tile {
 
 export interface PageContent {
   content: TileTemplate[];
+}
+
+export interface LocaleConfig {
+  locales: String[];
+  currLocale: String;
+  hideLocaleSwitcher?: boolean;
 }
