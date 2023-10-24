@@ -83,6 +83,7 @@ const otherLocale = computed(() => {
   const found = Object.keys(tile.value.data?.text as TextLocale).find(
     (locale) => locale !== props.locale
   );
-  if (found) return [found, (tile.value.data?.text as TextLocale)[found]];
+  if (found && (tile.value.data?.text as TextLocale)[found])
+    return [found, (tile.value.data?.text as TextLocale)[found]];
 });
 </script>
