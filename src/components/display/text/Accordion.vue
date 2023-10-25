@@ -2,7 +2,7 @@
   <div>
     <Disclosure v-slot="{ open }">
       <DisclosureButton
-        :class="`p-4 bg-gray-400 flex justify-between items-center w-full rounded-md ${
+        :class="`p-4 bg-gray-400 flex justify-between items-center w-full rounded-md text-left ${
           open && 'rounded-b-none'
         }`"
       >
@@ -18,19 +18,28 @@
           :class="`h-6 w-6 ml-4 ${open ? 'rotate-180 transform' : ''}`"
         />
       </DisclosureButton>
-      <DisclosurePanel class="bg-gray-200 w-full p-4 rounded-b-md">
-        <div
-          v-if="tinymceEnabled"
-          v-html="locale ? (data?.secondaryText as TextLocale)[locale] : data?.secondaryText"
-        ></div>
-        <p v-else class="text-ellipsis overflow-hidden">
-          {{
-            locale
-              ? (data?.secondaryText as TextLocale)[locale]
-              : data?.secondaryText
-          }}
-        </p>
-      </DisclosurePanel>
+      <transition
+        enter-active-class="transition duration-100 ease-out"
+        enter-from-class="transform scale-95 h-0 opacity-0"
+        enter-to-class="transform scale-100 h-auto opacity-100"
+        leave-active-class="transition duration-75 ease-out"
+        leave-from-class="transform scale-100 h-auto opacity-100"
+        leave-to-class="transform scale-95 h-0 opacity-0"
+      >
+        <DisclosurePanel class="bg-gray-200 w-full p-4 rounded-b-md">
+          <div
+            v-if="tinymceEnabled"
+            v-html="locale ? (data?.secondaryText as TextLocale)[locale] : data?.secondaryText"
+          ></div>
+          <p v-else class="text-ellipsis overflow-hidden">
+            {{
+              locale
+                ? (data?.secondaryText as TextLocale)[locale]
+                : data?.secondaryText
+            }}
+          </p>
+        </DisclosurePanel>
+      </transition>
     </Disclosure>
   </div>
 </template>

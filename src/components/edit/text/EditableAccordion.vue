@@ -37,28 +37,37 @@
           :class="`h-6 w-6 ml-4 ${open ? 'rotate-180 transform' : ''}`"
         />
       </DisclosureButton>
-      <DisclosurePanel class="bg-gray-200 w-full p-4 rounded-b-md">
-        <Editor
-          v-if="tinymceApiKey"
-          v-model="secondaryText"
-          :api-key="tinymceApiKey"
-          :init="{
-            plugins: 'lists link image table',
-            menubar: 'edit view insert format table',
-            toolbar:
-              'undo redo | blocks forecolor bold italic underline blockquote link removeformat | bullist numlist | alignleft aligncenter alignright alignjustify | image table',
-            placeholder: 'Click to edit accordion body',
-          }"
-          :inline="true"
-        />
-        <textarea
-          v-else
-          v-model="secondaryText"
-          class="p-1 w-full"
-          placeholder="Click to edit accordion body"
-          rows="5"
-        ></textarea>
-      </DisclosurePanel>
+      <transition
+        enter-active-class="transition duration-100 ease-out"
+        enter-from-class="transform scale-95 h-0 opacity-0"
+        enter-to-class="transform scale-100 h-auto opacity-100"
+        leave-active-class="transition duration-75 ease-out"
+        leave-from-class="transform scale-100 h-auto opacity-100"
+        leave-to-class="transform scale-95 h-0 opacity-0"
+      >
+        <DisclosurePanel class="bg-gray-200 w-full p-4 rounded-b-md">
+          <Editor
+            v-if="tinymceApiKey"
+            v-model="secondaryText"
+            :api-key="tinymceApiKey"
+            :init="{
+              plugins: 'lists link image table',
+              menubar: 'edit view insert format table',
+              toolbar:
+                'undo redo | blocks forecolor bold italic underline blockquote link removeformat | bullist numlist | alignleft aligncenter alignright alignjustify | image table',
+              placeholder: 'Click to edit accordion body',
+            }"
+            :inline="true"
+          />
+          <textarea
+            v-else
+            v-model="secondaryText"
+            class="p-1 w-full"
+            placeholder="Click to edit accordion body"
+            rows="5"
+          ></textarea>
+        </DisclosurePanel>
+      </transition>
     </Disclosure>
     <LangAccordion v-if="otherLocale" :locale="otherLocale" tinymce-enabled />
   </div>
