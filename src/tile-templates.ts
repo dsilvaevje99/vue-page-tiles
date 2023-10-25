@@ -15,6 +15,9 @@ import EditableColumns from "./components/edit/layout/EditableColumns.vue";
 import Banner from "./components/display/text/Banner.vue";
 import EditableBanner from "./components/edit/text/EditableBanner.vue";
 
+import Accordion from "./components/display/text/Accordion.vue";
+import EditableAccordion from "./components/edit/text/EditableAccordion.vue";
+
 export const HEADING_TEMPLATE: TileTemplate = {
   display: Heading,
   edit: () => EditableHeading,
@@ -58,5 +61,14 @@ export const BANNER_TEMPLATE: TileTemplate = {
   },
   attributes: {
     bannerType: "info",
+  },
+};
+
+export const ACCORDION_TEMPLATE: TileTemplate = {
+  display: Accordion,
+  edit: () => EditableAccordion,
+  data: {
+    text: "",
+    secondaryText: "",
   },
 };

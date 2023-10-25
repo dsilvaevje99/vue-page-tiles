@@ -12,40 +12,11 @@
       </p>
       <div class="flex pt-1">
         <button
+          v-for="h in standardHeights"
           class="border-solid border-2 border-gray-400 hover:border-gray-900 hover:text-gray-900 rounded-3xl p-1 mx-1 text-xs"
-          @click="() => (height = '5rem')"
+          @click="() => (height = h)"
         >
-          5rem
-        </button>
-        <button
-          class="border-solid border-2 border-gray-400 hover:border-gray-900 hover:text-gray-900 rounded-3xl p-1 mx-1 text-xs"
-          @click="() => (height = '6rem')"
-        >
-          6rem
-        </button>
-        <button
-          class="border-solid border-2 border-gray-400 hover:border-gray-900 hover:text-gray-900 rounded-3xl p-1 mx-1 text-xs"
-          @click="() => (height = '7rem')"
-        >
-          7rem
-        </button>
-        <button
-          class="border-solid border-2 border-gray-400 hover:border-gray-900 hover:text-gray-900 rounded-3xl p-1 mx-1 text-xs"
-          @click="() => (height = '10rem')"
-        >
-          10rem
-        </button>
-        <button
-          class="border-solid border-2 border-gray-400 hover:border-gray-900 hover:text-gray-900 rounded-3xl p-1 mx-1 text-xs"
-          @click="() => (height = '15rem')"
-        >
-          15rem
-        </button>
-        <button
-          class="border-solid border-2 border-gray-400 hover:border-gray-900 hover:text-gray-900 rounded-3xl p-1 mx-1 text-xs"
-          @click="() => (height = '20rem')"
-        >
-          20rem
+          {{ h }}
         </button>
       </div>
     </div>
@@ -67,6 +38,17 @@ const props = defineProps({
   },
 });
 const emit = defineEmits(["update"]);
+
+const standardHeights = [
+  "0.5rem",
+  "1rem",
+  "2rem",
+  "3rem",
+  "5rem",
+  "7rem",
+  "10rem",
+  "15rem",
+];
 
 const spacerRef = ref<HTMLDivElement>();
 const heightTimer = ref();

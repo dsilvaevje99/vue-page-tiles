@@ -13,11 +13,11 @@ This package let's you setup a Vue project where a user can generate page conten
 - Columns
 - Vertical spacer
 - Banners
+- Accordions
 
 ### Coming soon:
 
 - Media (Images & videos)
-- Accordions
 - Tables
 
 ## Installation and usage
@@ -75,23 +75,29 @@ The page content is just an object, so it can easily be stringified into JSON an
 ### i18n
 
 If your project uses any kind of internationalization, you can configure the package to allow users to add translated text for all components with written content. To do so;
-1. go to the reactive object containing the page content and add a propterty called `localeConfig`, which should be an object containing mandatory properties `locales` and `currLocale`. It should look like this:
+
+1. go to the reactive object containing the page content and add a property called `localeConfig`, which should be an object containing mandatory properties `locales` and `currLocale`. It should look like this:
+
 ```
 const page = reactive({
   content: [],
   localeConfig: { locales: ["en", "es", "fr"], currLocale: "en" },
 });
 ```
+
 2. Pass the object to the `<PageTileEditor />` component in a prop called `locale-config` as so:
+
 ```
 <PageTileEditor ... :locale-config='page.localeConfig' />
 ```
+
 3. Pass the `currLocale` property to the `<PageTiles />` component in a prop called `locale`as so:
+
 ```
 <PageTiles ... :locale='page.localeConfig.currLocale' />
 ```
 
-By default a locale switcher component will be rendered inside the `<PageTileEditor />`, but if you wish to implement your own you can add the property `hideLocaleSwitcher: true` to the `localeConfig` object and switch the `currLocale` property manually. 
+By default a locale switcher component will be rendered inside the `<PageTileEditor />`, but if you wish to implement your own you can add the property `hideLocaleSwitcher: true` to the `localeConfig` object and switch the `currLocale` property manually.
 
 Note that i18n support currently only applies to text content created by the user, and not package text such as tile names and placeholders.
 
@@ -116,4 +122,7 @@ This package includes an optional integration with TinyMCE - one of the best WYS
 ## Changelog
 
 Details changed for each release are documented in the [release notes](https://github.com/dsilvaevje99/vue-page-tiles/releases/).
-````
+
+```
+
+```

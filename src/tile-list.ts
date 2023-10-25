@@ -6,12 +6,14 @@ import {
   VERTICAL_SPACER_TEMPLATE,
   COLUMNS_TEMPLATE,
   BANNER_TEMPLATE,
+  ACCORDION_TEMPLATE,
 } from "./tile-templates";
 
 import { Bars3BottomLeftIcon, ArrowsUpDownIcon } from "@heroicons/vue/20/solid";
 import {
   ViewColumnsIcon,
   ExclamationTriangleIcon,
+  ChevronDownIcon,
 } from "@heroicons/vue/24/outline";
 import { HeaderIcon } from "./assets/custom-icons";
 
@@ -79,5 +81,10 @@ export default <Tile[]>[
         bannerType,
       },
     })),
+  },
+  {
+    title: "Accordion",
+    icon: ChevronDownIcon,
+    template: ACCORDION_TEMPLATE,
   },
 ];

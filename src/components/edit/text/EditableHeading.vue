@@ -55,11 +55,12 @@ const value = computed({
   },
 });
 const otherLocale = computed(() => {
-  const found = Object.keys(tile.value.data?.text as TextLocale).find(
-    (locale) => locale !== props.locale
-  );
-  if (found && (tile.value.data?.text as TextLocale)[found])
-    return [found, (tile.value.data?.text as TextLocale)[found]];
+  const found =
+    typeof value.value === "object"
+      ? Object.keys(value.value).find((locale) => locale !== props.locale)
+      : false;
+  if (found && (value.value as unknown as TextLocale)[found])
+    return [found, (value.value as unknown as TextLocale)[found]];
 });
 const alignment = computed(() => tile.value.attributes?.align || "center");
 const fontSize = computed(() => tile.value.attributes?.fontSize || "4xl");
