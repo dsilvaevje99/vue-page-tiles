@@ -38,12 +38,12 @@
         />
       </DisclosureButton>
       <transition
-        enter-active-class="transition duration-100 ease-out"
-        enter-from-class="transform scale-95 h-0 opacity-0"
-        enter-to-class="transform scale-100 h-auto opacity-100"
-        leave-active-class="transition duration-75 ease-out"
-        leave-from-class="transform scale-100 h-auto opacity-100"
-        leave-to-class="transform scale-95 h-0 opacity-0"
+        enter-active-class="transition origin-top duration-150 ease-out"
+        enter-from-class="transform scale-y-0 opacity-0"
+        enter-to-class="transform scale-y-100 opacity-100"
+        leave-active-class="transition origin-top duration-100 ease-out"
+        leave-from-class="transform scale-y-100 opacity-100"
+        leave-to-class="transform scale-y-0 opacity-0"
       >
         <DisclosurePanel class="bg-gray-200 w-full p-4 rounded-b-md">
           <Editor
