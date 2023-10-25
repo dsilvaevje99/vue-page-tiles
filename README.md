@@ -70,7 +70,7 @@ Remember to include the generated CSS from the package by importing it into your
 
 #### Saving the page content
 
-The page content is just an object, so it can easily be stringified into JSON and saved to your database. When fetching the page content, just replace the reactive object and you're good to go!
+The `content` property of your reactive object is just an array of objects, so it can easily be stringified into JSON and saved to your database. When fetching the page content, just replace the `content` array in the reactive object and you're good to go!
 
 ### i18n
 
