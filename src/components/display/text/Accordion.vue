@@ -2,7 +2,7 @@
   <div>
     <Disclosure v-slot="{ open }">
       <DisclosureButton
-        :class="`p-4 bg-gray-400 flex justify-between items-center w-full rounded-md text-left ${
+        :class="`p-4 bg-gray-300 flex justify-between items-center w-full rounded-md text-left ${
           open && 'rounded-b-none'
         }`"
       >

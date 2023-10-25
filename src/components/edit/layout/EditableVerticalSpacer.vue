@@ -70,6 +70,7 @@ const height = computed({
   },
 });
 
+let firstLoad = true;
 onMounted(() => {
   const fontSize = Number(
     window
@@ -78,6 +79,10 @@ onMounted(() => {
       .match(/\d+/)![0]
   );
   const resizeObserver = new ResizeObserver(() => {
+    if (firstLoad) {
+      firstLoad = false;
+      return;
+    }
     clearTimeout(heightTimer.value);
     heightTimer.value = setTimeout(() => {
       height.value = `${spacerRef.value!.clientHeight / fontSize}rem`;
