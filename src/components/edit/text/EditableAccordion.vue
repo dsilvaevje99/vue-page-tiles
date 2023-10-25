@@ -159,7 +159,7 @@ const otherLocale = computed(() => {
     (tile.value.data?.secondaryText as TextLocale)[foundSecondary];
   if (foundAndHasValue || foundSecondaryAndHasValue)
     return [
-      foundText || foundSecondary,
+      (foundText || foundSecondary) as string,
       `<div>${
         foundAndHasValue && (tile.value.data?.text as TextLocale)[foundText]
       }${
