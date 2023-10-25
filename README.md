@@ -76,7 +76,7 @@ The `content` property of your reactive object is just an array of objects, so i
 
 If your project uses any kind of internationalization, you can configure the package to allow users to add translated text for all components with written content. To do so;
 
-1. go to the reactive object containing the page content and add a property called `localeConfig`, which should be an object containing mandatory properties `locales` and `currLocale`. It should look like this:
+1. Go to the reactive object containing the page content and add a property called `localeConfig`, which should be an object containing mandatory properties `locales` and `currLocale`. It should look like this:
 
 ```
 const page = reactive({
@@ -122,7 +122,3 @@ This package includes an optional integration with TinyMCE - one of the best WYS
 ## Changelog
 
 Details changed for each release are documented in the [release notes](https://github.com/dsilvaevje99/vue-page-tiles/releases/).
-
-```
-
-```
