@@ -1,0 +1,62 @@
+<template>
+  <div>
+    <Disclosure v-slot="{ open }">
+      <DisclosureButton
+        :class="`p-4 bg-gray-400 flex justify-between items-center w-full rounded-md ${
+          open && 'rounded-b-none'
+        }`"
+      >
+        <div
+          v-if="tinymceEnabled"
+          class="flex-1"
+          v-html="locale ? (data?.text as TextLocale)[locale] : data?.text"
+        ></div>
+        <p v-else class="flex-1 text-ellipsis overflow-hidden">
+          {{ locale ? (data?.text as TextLocale)[locale] : data?.text }}
+        </p>
+        <ChevronUpIcon
+          :class="`h-6 w-6 ml-4 ${open ? 'rotate-180 transform' : ''}`"
+        />
+      </DisclosureButton>
+      <DisclosurePanel class="bg-gray-200 w-full p-4 rounded-b-md">
+        <div
+          v-if="tinymceEnabled"
+          v-html="locale ? (data?.secondaryText as TextLocale)[locale] : data?.secondaryText"
+        ></div>
+        <p v-else class="text-ellipsis overflow-hidden">
+          {{
+            locale
+              ? (data?.secondaryText as TextLocale)[locale]
+              : data?.secondaryText
+          }}
+        </p>
+      </DisclosurePanel>
+    </Disclosure>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { Data, TextLocale } from "../../../interfaces";
+import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
+import { ChevronUpIcon } from "@heroicons/vue/20/solid";
+
+defineProps({
+  data: Object as () => Data,
+  tinymceEnabled: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+  locale: {
+    type: String,
+    required: false,
+  },
+});
+</script>
+
+<script lang="ts">
+// this prevents a console warning for not including attributes in props
+export default {
+  inheritAttrs: false,
+};
+</script>

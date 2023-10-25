@@ -13,11 +13,11 @@ This package let's you setup a Vue project where a user can generate page conten
 - Columns
 - Vertical spacer
 - Banners
+- Accordions
 
 ### Coming soon:
 
 - Media (Images & videos)
-- Accordions
 - Tables
 
 ## Installation and usage

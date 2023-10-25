@@ -4,6 +4,7 @@ export interface TextLocale {
 
 export interface Data {
   text?: string | TextLocale;
+  secondaryText?: string | TextLocale;
   columns?: TileTemplate[][];
 }
 
