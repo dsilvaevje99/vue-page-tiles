@@ -146,12 +146,18 @@ const secondaryText = computed({
   },
 });
 const otherLocale = computed(() => {
-  const foundText = Object.keys(tile.value.data?.text as TextLocale).find(
-    (locale) => locale !== props.locale
-  );
-  const foundSecondary = Object.keys(
-    tile.value.data?.secondaryText as TextLocale
-  ).find((locale) => locale !== props.locale);
+  const foundText =
+    typeof text.value === "object"
+      ? Object.keys(tile.value.data?.text as TextLocale).find(
+          (locale) => locale !== props.locale
+        )
+      : false;
+  const foundSecondary =
+    typeof secondaryText.value === "object"
+      ? Object.keys(tile.value.data?.secondaryText as TextLocale).find(
+          (locale) => locale !== props.locale
+        )
+      : false;
   const foundAndHasValue =
     foundText && (tile.value.data?.text as TextLocale)[foundText];
   const foundSecondaryAndHasValue =
