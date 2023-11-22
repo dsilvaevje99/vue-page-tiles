@@ -4,7 +4,7 @@
     tinymce-enabled
     :locale="testState.localeConfig.currLocale"
   />
-  <div class="py-1 my-6 bg-gray-400"></div>
+  <div class="py-1 my-6 bg-gray-400">{{ JSON.stringify(testState) }}</div>
   <PageTileEditor
     v-model="testState.content"
     :locale-config="testState.localeConfig"
