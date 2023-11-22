@@ -15,9 +15,11 @@
     ></component>
   </div>
   <div v-else>
-    <p class="text-xl font-bold text-center text-gray-400 mb-4">
-      No page content yet
-    </p>
+    <slot name="no-content">
+      <p class="text-xl font-bold text-center text-gray-400 mb-4">
+        No page content yet
+      </p>
+    </slot>
   </div>
 </template>
 

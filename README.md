@@ -52,6 +52,8 @@ Proceed to insert the `<PageTiles />` component wherever you want the page conte
 <PageTiles :page='page' />
 ```
 
+The `<PageTiles />` component exposes a slot named "no-content" which can be used to display a custom message or loading component when there is no page content. By default it displays a message saying "No page content yet".
+
 #### How to generate page content
 
 Simply add the `<PageTileEditor />` wherever you want the user to be able to generate content, and bind the content array within the reactive object you created earlier with v-model:
