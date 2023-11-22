@@ -33,6 +33,10 @@
       "import": "./dist/vue-page-tiles.js",
       "require": "./dist/vue-page-tiles.umd.cjs"
     },
+    "./display": {
+      "import": "./dist/display.js",
+      "require": "./dist/display.umd.cjs"
+    },
     "./dist/style.css": {
       "import": "./dist/style.css",
       "require": "./dist/style.css"
