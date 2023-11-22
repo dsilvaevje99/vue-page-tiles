@@ -85,6 +85,8 @@ const page = reactive({
 });
 ```
 
+Alternatively, you can store the localeconfig object elsewhere in your application and pass it in where needed.
+
 2. Pass the object to the `<PageTileEditor />` component in a prop called `locale-config` as so:
 
 ```
@@ -98,6 +100,8 @@ const page = reactive({
 ```
 
 By default a locale switcher component will be rendered inside the `<PageTileEditor />`, but if you wish to implement your own you can add the property `hideLocaleSwitcher: true` to the `localeConfig` object and switch the `currLocale` property manually.
+
+Depending on your implementation you might also need access to the change event of when a locale is changed. The `<PageTileEditor />` component emits such an event at `@localeChanged` with a payload of the new locale code as a string.
 
 Note that i18n support currently only applies to text content created by the user, and not package text such as tile names and placeholders.
 
