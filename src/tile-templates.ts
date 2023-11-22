@@ -20,7 +20,7 @@ export const VERTICAL_SPACER_TEMPLATE: TileTemplate = {
   display: "VerticalSpacer",
   edit: "EditableVerticalSpacer",
   attrs: {
-    height: "",
+    height: "1rem",
   },
 };
 
