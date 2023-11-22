@@ -2,8 +2,8 @@
   <component
     :is="header"
     :class="`text-${fontSize} text-${
-      attributes?.align || 'center'
-    } text-ellipsis overflow-hidden`"
+      attrs?.align || 'center'
+    } text-ellipsis overflow-x-clip`"
   >
     {{ locale ? (data?.text as TextLocale)[locale] : data?.text }}
   </component>
@@ -15,13 +15,13 @@ import type { Data, Attributes, TextLocale } from "../../../interfaces";
 
 const props = defineProps({
   data: Object as () => Data,
-  attributes: Object as () => Attributes,
+  attrs: Object as () => Attributes,
   locale: {
     type: String,
     required: false,
   },
 });
 
-const header = computed(() => props.attributes?.headerType || "h1");
-const fontSize = computed(() => props.attributes?.fontSize || "4xl");
+const header = computed(() => props.attrs?.headerType || "h1");
+const fontSize = computed(() => props.attrs?.fontSize || "4xl");
 </script>

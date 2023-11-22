@@ -53,17 +53,17 @@ const standardHeights = [
 const spacerRef = ref<HTMLDivElement>();
 const heightTimer = ref();
 
-const attributes = computed(() => props.state[props.index].attributes);
+const attrs = computed(() => props.state[props.index].attrs);
 const height = computed({
   get() {
-    return attributes.value?.height || "1rem";
+    return attrs.value?.height || "1rem";
   },
   set(newHeight: string) {
     const oldItem = props.state[props.index];
     emit("update", {
       ...oldItem,
-      attributes: {
-        ...attributes.value,
+      attrs: {
+        ...attrs.value,
         height: newHeight,
       },
     });

@@ -44,7 +44,7 @@ export default <Tile[]>[
     template: HEADING_TEMPLATE,
     variants: HEADING_VARIANTS.map((variant) => ({
       ...HEADING_TEMPLATE,
-      attributes: {
+      attrs: {
         headerType: variant.type,
         fontSize: variant.size,
       },
@@ -77,7 +77,7 @@ export default <Tile[]>[
     template: BANNER_TEMPLATE,
     variants: BANNER_VARIANTS.map(({ bannerType }) => ({
       ...BANNER_TEMPLATE,
-      attributes: {
+      attrs: {
         bannerType,
       },
     })),

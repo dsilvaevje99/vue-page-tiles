@@ -6,9 +6,9 @@
       <component
         v-for="tile in col"
         :key="`col-tile-d-${index}`"
-        :is="{ ...tile.display }"
+        :is="tile.display"
         :data="tile.data"
-        :attributes="tile.attributes"
+        :attrs="tile.attrs"
         :tinymce-enabled="tinymceEnabled"
         :locale="locale"
       ></component>
@@ -22,7 +22,7 @@ import type { Attributes, Data } from "../../../interfaces";
 
 const props = defineProps({
   data: Object as () => Data,
-  attributes: Object as () => Attributes,
+  attrs: Object as () => Attributes,
   tinymceEnabled: {
     type: Boolean,
     required: false,
@@ -35,5 +35,5 @@ const props = defineProps({
 });
 
 const columns = computed(() => props.data?.columns);
-const gap = computed(() => props.attributes?.gap);
+const gap = computed(() => props.attrs?.gap);
 </script>

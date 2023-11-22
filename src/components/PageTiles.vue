@@ -7,9 +7,9 @@
     <component
       v-for="(tile, index) in page.content"
       :key="`tile-d-${index}`"
-      :is="{ ...tile.display }"
+      :is="tile.display"
       :data="tile.data"
-      :attributes="tile.attributes"
+      :attrs="tile.attrs"
       :tinymce-enabled="tinymceEnabled"
       :locale="locale"
     ></component>

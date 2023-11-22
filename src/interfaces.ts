@@ -42,10 +42,10 @@ export interface Attributes {
 }
 
 export interface TileTemplate {
-  display: Object;
-  edit: () => Object;
+  display: string;
+  edit: string;
   data?: Data;
-  attributes?: Attributes;
+  attrs?: Attributes;
 }
 
 export interface Tile {
@@ -55,12 +55,13 @@ export interface Tile {
   variants?: TileTemplate[];
 }
 
-export interface PageContent {
-  content: TileTemplate[];
-}
-
 export interface LocaleConfig {
   locales: String[];
   currLocale: String;
   hideLocaleSwitcher?: boolean;
+}
+
+export interface PageContent {
+  name?: string;
+  content: TileTemplate[];
 }

@@ -30,7 +30,7 @@ const props = defineProps({
     type: Object as () => Data,
     required: true,
   },
-  attributes: {
+  attrs: {
     type: Object as () => Attributes,
     required: true,
   },
@@ -45,5 +45,5 @@ const props = defineProps({
   },
 });
 
-const bannerType = computed(() => props.attributes.bannerType || "info");
+const bannerType = computed(() => props.attrs.bannerType || "info");
 </script>
