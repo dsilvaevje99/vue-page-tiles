@@ -31,7 +31,22 @@ $ npm install vue-page-tiles
 
 ### How to use
 
-The package exports 2 components, `<PageTiles />` and `<PageTileEditor />`.
+The package exports 2 main components, `<PageTiles />` and `<PageTileEditor />`. In addition, all tile-components are exported.
+
+#### Project configuration
+
+**IMPORTANT:** For the package to work correctly you need to globally register the tile components from the package in your consuming project. There are 2 scenarios to consider:
+
+1. Your application will contain both the tile-displayer and the tile-editor inside the same project.
+2. You will split the tile-displayer and tile-editor into two separate projects. For example as a client-facing site and a separate admin site.
+
+##### Scenario 1
+
+For **scenario 1**, you will only need to globally register the display components. These can be imported from `vue-page-tiles/display`, then looped over and registered in accordance with your framework.
+
+##### Scenario 2
+
+For **scenario 2**, you will have to register all components globally, as you would want to both edit and display the tiles. For this you can just import all components straight from the `vue-page-tiles` library, loop over them and register them in accordance with your framework.
 
 #### How to display page content
 
