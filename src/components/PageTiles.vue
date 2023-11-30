@@ -7,17 +7,19 @@
     <component
       v-for="(tile, index) in page.content"
       :key="`tile-d-${index}`"
-      :is="{ ...tile.display }"
+      :is="tile.display"
       :data="tile.data"
-      :attributes="tile.attributes"
+      :attrs="tile.attrs"
       :tinymce-enabled="tinymceEnabled"
       :locale="locale"
     ></component>
   </div>
   <div v-else>
-    <p class="text-xl font-bold text-center text-gray-400 mb-4">
-      No page content yet
-    </p>
+    <slot name="no-content">
+      <p class="text-xl font-bold text-center text-gray-400 mb-4">
+        No page content yet
+      </p>
+    </slot>
   </div>
 </template>
 

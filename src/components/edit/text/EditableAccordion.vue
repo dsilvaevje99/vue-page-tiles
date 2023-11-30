@@ -146,35 +146,32 @@ const secondaryText = computed({
   },
 });
 const otherLocale = computed(() => {
+  const header = tile.value.data?.text;
+  const body = tile.value.data?.secondaryText;
   const foundText =
-    typeof text.value === "object"
-      ? Object.keys(tile.value.data?.text as TextLocale).find(
+    typeof header === "object"
+      ? Object.keys(header as TextLocale).find(
           (locale) => locale !== props.locale
         )
       : false;
   const foundSecondary =
-    typeof secondaryText.value === "object"
-      ? Object.keys(tile.value.data?.secondaryText as TextLocale).find(
+    typeof body === "object"
+      ? Object.keys(body as TextLocale).find(
           (locale) => locale !== props.locale
         )
       : false;
-  const foundAndHasValue =
-    foundText && (tile.value.data?.text as TextLocale)[foundText];
+  const foundAndHasValue = foundText && (header as TextLocale)[foundText];
   const foundSecondaryAndHasValue =
-    foundSecondary &&
-    (tile.value.data?.secondaryText as TextLocale)[foundSecondary];
+    foundSecondary && (body as TextLocale)[foundSecondary];
   if (foundAndHasValue || foundSecondaryAndHasValue)
     return [
       (foundText || foundSecondary) as string,
-      `<div>${
-        foundAndHasValue && (tile.value.data?.text as TextLocale)[foundText]
-      }${
+      `<div>${foundAndHasValue && (header as TextLocale)[foundText]}${
         foundAndHasValue &&
         foundSecondaryAndHasValue &&
         '<div class="w-full pt-1 mb-1 border-solid border-b-[1px] border-gray-400"></div>'
       }${
-        foundSecondaryAndHasValue &&
-        (tile.value.data?.secondaryText as TextLocale)[foundSecondary]
+        foundSecondaryAndHasValue && (body as TextLocale)[foundSecondary]
       }</div>`,
     ];
 });

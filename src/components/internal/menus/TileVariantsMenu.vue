@@ -59,9 +59,7 @@ const emit = defineEmits(["add"]);
 const open = ref<boolean>(false);
 
 const handleAddHeaderVariant = (variant: String) => {
-  const template = props.variants.find(
-    (v) => v.attributes?.headerType === variant
-  );
+  const template = props.variants.find((v) => v.attrs?.headerType === variant);
   if (template) emit("add", template);
 };
 

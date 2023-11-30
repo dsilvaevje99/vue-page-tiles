@@ -1,5 +1,5 @@
 <template>
-  <div class="w-max mx-auto mt-1">
+  <div class="w-max max-w-full mx-auto mt-1">
     <Disclosure v-slot="{ open }" defaultOpen>
       <DisclosureButton
         :class="`flex justify-between px-2 py-1 text-left text-sm min-w-max ${

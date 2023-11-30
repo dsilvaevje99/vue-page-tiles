@@ -10,9 +10,10 @@ export default defineConfig({
   css: { postcss },
   build: {
     lib: {
-      entry: path.resolve(__dirname, "src/index.ts"),
-      name: "VuePageTiles",
-      fileName: "vue-page-tiles",
+      entry: {
+        "vue-page-tiles": path.resolve(__dirname, "src/index.ts"),
+        display: path.resolve(__dirname, "src/components/display/index.ts"),
+      },
     },
     rollupOptions: {
       external: ["vue"],
@@ -22,5 +23,8 @@ export default defineConfig({
         },
       },
     },
+  },
+  define: {
+    __VUE_OPTIONS_API__: false,
   },
 });

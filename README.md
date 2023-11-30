@@ -31,7 +31,22 @@ $ npm install vue-page-tiles
 
 ### How to use
 
-The package exports 2 components, `<PageTiles />` and `<PageTileEditor />`.
+The package exports 2 main components, `<PageTiles />` and `<PageTileEditor />`. In addition, all tile-components are exported.
+
+#### Project configuration
+
+**IMPORTANT:** For the package to work correctly you need to globally register the tile components from the package in your consuming project. There are 2 scenarios to consider:
+
+1. Your application will contain both the tile-displayer and the tile-editor inside the same project.
+2. You will split the tile-displayer and tile-editor into two separate projects. For example as a client-facing site and a separate admin site.
+
+##### Scenario 1
+
+For **scenario 1**, you will only need to globally register the display components. These can be imported from `vue-page-tiles/display`, then looped over and registered in accordance with your framework.
+
+##### Scenario 2
+
+For **scenario 2**, you will have to register all components globally, as you would want to both edit and display the tiles. For this you can just import all components straight from the `vue-page-tiles` library, loop over them and register them in accordance with your framework.
 
 #### How to display page content
 
@@ -52,6 +67,8 @@ Proceed to insert the `<PageTiles />` component wherever you want the page conte
 <PageTiles :page='page' />
 ```
 
+The `<PageTiles />` component exposes a slot named "no-content" which can be used to display a custom message or loading component when there is no page content. By default it displays a message saying "No page content yet".
+
 #### How to generate page content
 
 Simply add the `<PageTileEditor />` wherever you want the user to be able to generate content, and bind the content array within the reactive object you created earlier with v-model:
@@ -70,13 +87,13 @@ Remember to include the generated CSS from the package by importing it into your
 
 #### Saving the page content
 
-The page content is just an object, so it can easily be stringified into JSON and saved to your database. When fetching the page content, just replace the reactive object and you're good to go!
+The `content` property of your reactive object is just an array of objects, so it can easily be stringified into JSON and saved to your database. When fetching the page content, just replace the `content` array in the reactive object and you're good to go!
 
 ### i18n
 
 If your project uses any kind of internationalization, you can configure the package to allow users to add translated text for all components with written content. To do so;
 
-1. go to the reactive object containing the page content and add a property called `localeConfig`, which should be an object containing mandatory properties `locales` and `currLocale`. It should look like this:
+1. Go to the reactive object containing the page content and add a property called `localeConfig`, which should be an object containing mandatory properties `locales` and `currLocale`. It should look like this:
 
 ```
 const page = reactive({
@@ -84,6 +101,8 @@ const page = reactive({
   localeConfig: { locales: ["en", "es", "fr"], currLocale: "en" },
 });
 ```
+
+Alternatively, you can store the localeconfig object elsewhere in your application and pass it in where needed.
 
 2. Pass the object to the `<PageTileEditor />` component in a prop called `locale-config` as so:
 
@@ -98,6 +117,8 @@ const page = reactive({
 ```
 
 By default a locale switcher component will be rendered inside the `<PageTileEditor />`, but if you wish to implement your own you can add the property `hideLocaleSwitcher: true` to the `localeConfig` object and switch the `currLocale` property manually.
+
+Depending on your implementation you might also need access to the change event of when a locale is changed. The `<PageTileEditor />` component emits such an event at `@localeChanged` with a payload of the new locale code as a string.
 
 Note that i18n support currently only applies to text content created by the user, and not package text such as tile names and placeholders.
 
@@ -122,7 +143,3 @@ This package includes an optional integration with TinyMCE - one of the best WYS
 ## Changelog
 
 Details changed for each release are documented in the [release notes](https://github.com/dsilvaevje99/vue-page-tiles/releases/).
-
-```
-
-```

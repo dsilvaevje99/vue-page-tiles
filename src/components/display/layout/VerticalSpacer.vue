@@ -7,12 +7,10 @@ import { computed } from "vue";
 import type { Attributes } from "../../../interfaces";
 
 const props = defineProps({
-  attributes: Object as () => Attributes,
+  attrs: Object as () => Attributes,
 });
 
-const height = computed(() =>
-  props.attributes?.height ? props.attributes.height : 0
-);
+const height = computed(() => (props.attrs?.height ? props.attrs.height : 0));
 </script>
 
 <script lang="ts">

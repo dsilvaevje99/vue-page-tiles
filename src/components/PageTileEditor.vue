@@ -10,7 +10,7 @@
         !localeConfig.hideLocaleSwitcher
       "
       :locale-config="localeConfig"
-      @change="(locale: string) => (localeConfig as LocaleConfig).currLocale = locale"
+      @change="handleLocaleChanged"
     />
     <div
       v-for="(component, index) in modelValue"
@@ -22,7 +22,7 @@
       >
         <component
           class="bg-transparent"
-          :is="component.edit()"
+          :is="component.edit"
           :state="modelValue"
           :index="index"
           :tinymce-api-key="tinymceApiKey"
@@ -76,7 +76,7 @@ const props = defineProps({
   //customComponents: Array, <- can maybe be added later? It works, but components would have to be available both in edit and display apps
 });
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(["update:modelValue", "localeChanged"]);
 
 const handleAddTile = (tile: TileTemplate, index?: number) => {
   if (index !== undefined) props.modelValue.splice(index + 1, 0, tile);
@@ -91,6 +91,11 @@ const handleContentChanged = (newContent: TileTemplate, index: number) => {
   const copy: TileTemplate[] = [...props.modelValue];
   copy[index] = newContent;
   emit("update:modelValue", copy);
+};
+
+const handleLocaleChanged = (newLocale: string) => {
+  (props.localeConfig as LocaleConfig).currLocale = newLocale;
+  emit("localeChanged", newLocale);
 };
 </script>
 
