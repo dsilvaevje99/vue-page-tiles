@@ -11,7 +11,7 @@
           class="flex-1"
           v-html="locale ? (data?.text as TextLocale)[locale] : data?.text"
         ></div>
-        <p v-else class="flex-1 text-ellipsis overflow-hidden">
+        <p v-else class="flex-1">
           {{ locale ? (data?.text as TextLocale)[locale] : data?.text }}
         </p>
         <ChevronUpIcon
@@ -31,7 +31,7 @@
             v-if="tinymceEnabled"
             v-html="locale ? (data?.secondaryText as TextLocale)[locale] : data?.secondaryText"
           ></div>
-          <p v-else class="text-ellipsis overflow-hidden">
+          <p v-else>
             {{
               locale
                 ? (data?.secondaryText as TextLocale)[locale]
